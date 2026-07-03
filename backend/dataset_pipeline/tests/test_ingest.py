@@ -13,7 +13,12 @@ from backend.dataset_pipeline.exceptions import (
     PipelineValidationError,
 )
 from backend.dataset_pipeline.ingest import DatasetIngestor
-from backend.dataset_pipeline.models import DatasetContext, PipelineResult, PipelineStatus
+from backend.dataset_pipeline.models import (
+    DatasetContext,
+    DatasetLayout,
+    PipelineResult,
+    PipelineStatus,
+)
 
 
 class TestDatasetIngestor:
@@ -115,9 +120,10 @@ class TestDatasetIngestor:
     async def test_validate_source_with_directory(
         self, ingestor: DatasetIngestor, temp_source_dir: Path,
     ) -> None:
-        fmt = await ingestor.validate_source(temp_source_dir)
-        assert fmt is not None
-        assert isinstance(fmt, str)
+        layout = await ingestor.validate_source(temp_source_dir)
+        assert isinstance(layout, DatasetLayout)
+        assert layout.dataset_type == "unknown"
+        assert temp_source_dir.resolve() in layout.image_directories
 
     @pytest.mark.asyncio
     async def test_validate_source_with_json_file(
@@ -125,8 +131,9 @@ class TestDatasetIngestor:
     ) -> None:
         json_file = tmp_path / "coco_annotations.json"
         json_file.write_text('{"images": []}')
-        fmt = await ingestor.validate_source(json_file)
-        assert fmt == "coco_json"
+        layout = await ingestor.validate_source(json_file)
+        assert isinstance(layout, DatasetLayout)
+        assert json_file.resolve() in layout.annotation_files
 
     @pytest.mark.asyncio
     async def test_validate_source_with_yaml_file(
@@ -134,38 +141,20 @@ class TestDatasetIngestor:
     ) -> None:
         yaml_file = tmp_path / "data.yaml"
         yaml_file.write_text("train: ./images/train")
-        fmt = await ingestor.validate_source(yaml_file)
-        assert fmt == "yolo_txt"
+        layout = await ingestor.validate_source(yaml_file)
+        assert isinstance(layout, DatasetLayout)
+        assert yaml_file.resolve() in layout.annotation_files
 
     @pytest.mark.asyncio
-    async def test_validate_source_detects_coco_format(
+    async def test_validate_source_accepts_any_directory_with_images(
         self, ingestor: DatasetIngestor, tmp_path: Path,
     ) -> None:
-        src = tmp_path / "coco_dataset"
+        src = tmp_path / "my_dataset"
         src.mkdir()
         (src / "img.jpg").write_text("data")
-        fmt = await ingestor.validate_source(src)
-        assert fmt == "coco_json"
-
-    @pytest.mark.asyncio
-    async def test_validate_source_detects_yolo_format(
-        self, ingestor: DatasetIngestor, tmp_path: Path,
-    ) -> None:
-        src = tmp_path / "yolo_dataset"
-        src.mkdir()
-        (src / "img.jpg").write_text("data")
-        fmt = await ingestor.validate_source(src)
-        assert fmt == "yolo_txt"
-
-    @pytest.mark.asyncio
-    async def test_validate_source_detects_pascal_voc(
-        self, ingestor: DatasetIngestor, tmp_path: Path,
-    ) -> None:
-        src = tmp_path / "pascal_voc_data"
-        src.mkdir()
-        (src / "img.jpg").write_text("data")
-        fmt = await ingestor.validate_source(src)
-        assert fmt == "pascal_voc"
+        layout = await ingestor.validate_source(src)
+        assert isinstance(layout, DatasetLayout)
+        assert src.resolve() in layout.image_directories
 
     # ------------------------------------------------------------------
     # Error cases

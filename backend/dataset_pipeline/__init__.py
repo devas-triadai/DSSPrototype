@@ -18,6 +18,7 @@ from backend.dataset_pipeline.interfaces import (
 )
 from backend.dataset_pipeline.models import (
     DatasetContext,
+    DatasetLayout,
     ExecutionSummary,
     PipelineResult,
     PipelineStageResult,
@@ -37,6 +38,7 @@ __all__ = [
     "PipelineServiceInterface",
     "WorkflowInterface",
     "DatasetContext",
+    "DatasetLayout",
     "ExecutionSummary",
     "PipelineResult",
     "PipelineStageResult",

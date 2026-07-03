@@ -5,7 +5,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from backend.dataset_pipeline.models import DatasetContext, PipelineResult
+from backend.dataset_pipeline.models import DatasetContext, DatasetLayout, PipelineResult
 
 
 class WorkflowInterface(ABC):
@@ -120,6 +120,6 @@ class DatasetIngestorInterface(ABC):
         ...
 
     @abstractmethod
-    async def validate_source(self, source_path: Path) -> str:
-        """Validate the dataset source path and return the detected format."""
+    async def validate_source(self, source_path: Path) -> DatasetLayout:
+        """Validate the dataset source path and return a structured layout."""
         ...

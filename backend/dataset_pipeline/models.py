@@ -42,6 +42,16 @@ class ExecutionSummary(BaseModel):
     stages_total: int = 0
 
 
+class DatasetLayout(BaseModel):
+    """Describes a recognised dataset directory layout."""
+
+    dataset_type: str
+    root_path: Path
+    image_directories: list[Path] = Field(default_factory=list)
+    annotation_directory: Path | None = None
+    annotation_files: list[Path] = Field(default_factory=list)
+
+
 class DatasetContext(BaseModel):
     model_config = ConfigDict(frozen=False)
 

@@ -7,15 +7,27 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
-from backend.dataset_pipeline.exceptions import (
-    DatasetNotFoundError,
-    PipelineValidationError,
-)
+from backend.dataset_pipeline.detectors import detect_layout
+from backend.dataset_pipeline.exceptions import DatasetNotFoundError, PipelineValidationError
 from backend.dataset_pipeline.interfaces import DatasetIngestorInterface, WorkflowInterface
-from backend.dataset_pipeline.models import DatasetContext, PipelineResult, PipelineStatus
+from backend.dataset_pipeline.models import (
+    DatasetContext,
+    DatasetLayout,
+    PipelineResult,
+    PipelineStatus,
+)
 from backend.dataset_pipeline.workflow import DatasetWorkflow
 
 logger = logging.getLogger("dss.dataset_pipeline.ingest")
+
+_FORMAT_MAP: dict[str, str] = {
+    "coco": "coco_json",
+    "open_images_v7": "coco_json",
+    "visdrone": "coco_json",
+    "loveda": "coco_json",
+    "spacenet": "coco_json",
+    "seaships": "coco_json",
+}
 
 
 class DatasetIngestor(DatasetIngestorInterface):
@@ -27,35 +39,49 @@ class DatasetIngestor(DatasetIngestorInterface):
     def __init__(self, workflow: WorkflowInterface | None = None) -> None:
         self._workflow = workflow or DatasetWorkflow()
 
-    async def validate_source(self, source_path: Path) -> str:
-        """Validate the dataset source path and return the detected format."""
+    async def validate_source(self, source_path: Path) -> DatasetLayout:
+        """Validate the dataset source path and return a structured layout."""
+        source_path = source_path.resolve()
         if not source_path.exists():
             raise DatasetNotFoundError(
                 dataset_name=source_path.name,
                 path=str(source_path),
             )
 
-        source_path = source_path.resolve()
-
         if source_path.is_dir():
+            layout = detect_layout(source_path)
+            if layout is not None:
+                return layout
+
             images = list(source_path.glob("*.jpg")) + list(source_path.glob("*.png"))
             if not images:
                 raise PipelineValidationError(
                     f"No images found in directory: {source_path}",
                 )
-        elif source_path.is_file():
+            return DatasetLayout(
+                dataset_type="unknown",
+                root_path=source_path,
+                image_directories=[source_path],
+                annotation_files=[],
+            )
+
+        if source_path.is_file():
             ext = source_path.suffix.lower()
             if ext not in {".json", ".yaml", ".yml", ".csv", ".xml"}:
                 raise PipelineValidationError(
                     f"Unsupported dataset file format: {ext}",
                 )
-        else:
-            raise DatasetNotFoundError(
-                dataset_name=source_path.name,
-                path=str(source_path),
+            return DatasetLayout(
+                dataset_type="unknown",
+                root_path=source_path.parent,
+                image_directories=[],
+                annotation_files=[source_path],
             )
 
-        return self._detect_format(source_path)
+        raise DatasetNotFoundError(
+            dataset_name=source_path.name,
+            path=str(source_path),
+        )
 
     async def ingest(
         self,
@@ -78,13 +104,15 @@ class DatasetIngestor(DatasetIngestorInterface):
         if not source_path.exists():
             raise DatasetNotFoundError(dataset_name, str(source_path))
 
-        dataset_type = await self.validate_source(source_path)
+        layout: DatasetLayout = await self.validate_source(source_path)
+        dataset_type = _FORMAT_MAP.get(layout.dataset_type, self._detect_format(source_path))
 
         context = DatasetContext(
             dataset_name=dataset_name,
             source_path=source_path,
             dataset_type=dataset_type,
         )
+        context.metadata["dataset_layout"] = layout.model_dump()
 
         result = await self._workflow.execute(
             context=context,
