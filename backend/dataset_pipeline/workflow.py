@@ -22,11 +22,13 @@ from backend.dataset_pipeline.exceptions import StageExecutionError
 from backend.dataset_pipeline.interfaces import WorkflowInterface
 from backend.dataset_pipeline.models import (
     DatasetContext,
+    DatasetLayout,
     ExecutionSummary,
     PipelineResult,
     PipelineStageResult,
     PipelineStatus,
 )
+from backend.dataset_pipeline.resolver import DatasetFormatResolver
 from backend.dataset_quality.models import QualityReport
 from backend.dataset_quality.service import DatasetQualityService
 from backend.ontology_mapping.models import DatasetProfile as OntoDatasetProfile
@@ -172,7 +174,7 @@ class DatasetWorkflow(WorkflowInterface):
 
             context.catalog_entry_id = entry.entry_id
             context.metadata["catalog_entry"] = entry.model_dump()
-            context.dataset_type = entry.source_type
+            context.metadata["catalog_source_type"] = entry.source_type
 
             logger.info("Catalog entry created: %s", entry.entry_id)
             return PipelineStageResult(
@@ -260,7 +262,12 @@ class DatasetWorkflow(WorkflowInterface):
                 Path(pipeline_config.conversion_output_dir) / context.dataset_name
             )
 
-            source_format = context.dataset_type or self._detect_format(context.source_path)
+            layout_data = context.metadata.get("dataset_layout")
+            if layout_data is not None:
+                layout = DatasetLayout(**layout_data)
+                source_format = DatasetFormatResolver.resolve(layout, context.source_path)
+            else:
+                source_format = context.dataset_type or self._detect_format(context.source_path)
 
             load_result: LoadResult = await self._conversion.load_dataset(
                 path=str(context.source_path),

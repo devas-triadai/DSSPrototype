@@ -16,18 +16,10 @@ from backend.dataset_pipeline.models import (
     PipelineResult,
     PipelineStatus,
 )
+from backend.dataset_pipeline.resolver import DatasetFormatResolver
 from backend.dataset_pipeline.workflow import DatasetWorkflow
 
 logger = logging.getLogger("dss.dataset_pipeline.ingest")
-
-_FORMAT_MAP: dict[str, str] = {
-    "coco": "coco_json",
-    "open_images_v7": "coco_json",
-    "visdrone": "coco_json",
-    "loveda": "coco_json",
-    "spacenet": "coco_json",
-    "seaships": "coco_json",
-}
 
 
 class DatasetIngestor(DatasetIngestorInterface):
@@ -105,7 +97,7 @@ class DatasetIngestor(DatasetIngestorInterface):
             raise DatasetNotFoundError(dataset_name, str(source_path))
 
         layout: DatasetLayout = await self.validate_source(source_path)
-        dataset_type = _FORMAT_MAP.get(layout.dataset_type, self._detect_format(source_path))
+        dataset_type = DatasetFormatResolver.resolve(layout, source_path)
 
         context = DatasetContext(
             dataset_name=dataset_name,
@@ -137,17 +129,4 @@ class DatasetIngestor(DatasetIngestorInterface):
 
         return result
 
-    @staticmethod
-    def _detect_format(source_path: Path) -> str:
-        name_lower = source_path.name.lower()
-        if "coco" in name_lower:
-            return "coco_json"
-        if "yolo" in name_lower or "darknet" in name_lower:
-            return "yolo_txt"
-        if "voc" in name_lower or "pascal" in name_lower:
-            return "pascal_voc"
-        if source_path.is_file() and source_path.suffix.lower() == ".json":
-            return "coco_json"
-        if source_path.is_file() and source_path.suffix.lower() in {".yaml", ".yml"}:
-            return "yolo_txt"
-        return "coco_json"
+

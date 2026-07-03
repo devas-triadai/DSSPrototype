@@ -24,12 +24,14 @@ from backend.dataset_pipeline.models import (
     PipelineStageResult,
     PipelineStatus,
 )
+from backend.dataset_pipeline.resolver import DatasetFormatResolver
 from backend.dataset_pipeline.service import PipelineService
 from backend.dataset_pipeline.workflow import DatasetWorkflow
 
 __all__ = [
     "PipelineConfig",
     "pipeline_config",
+    "DatasetFormatResolver",
     "DatasetNotFoundError",
     "PipelineError",
     "PipelineValidationError",
