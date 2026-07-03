@@ -36,45 +36,66 @@ def _make_workflow(
     if with_full_mocks:
         ontology = MagicMock()
         ontology.register_dataset = AsyncMock()
-        ontology.map_dataset = AsyncMock(return_value=[
-            MagicMock(
-                source_label="car",
-                canonical_value="vehicle.car",
-                canonical_name="Car",
-                confidence=0.95,
-                model_dump=lambda: {"source_label": "car"},
-            ),
-        ])
+        ontology.map_dataset = AsyncMock(
+            return_value=[
+                MagicMock(
+                    source_label="car",
+                    canonical_value="vehicle.car",
+                    canonical_name="Car",
+                    confidence=0.95,
+                    model_dump=lambda: {"source_label": "car"},
+                ),
+            ]
+        )
 
         conversion = MagicMock()
-        conversion.load_dataset = AsyncMock(return_value=MagicMock(
-            image_count=100, annotation_count=500,
-        ))
-        conversion.convert_dataset = AsyncMock(return_value=MagicMock(
-            id="canonical_001", name="test", image_count=100,
-            annotation_count=500, class_count=10,
-        ))
-        conversion.export_dataset = AsyncMock(return_value=MagicMock(
-            export_format="yolo", output_path="/out",
-            images_exported=100, annotations_exported=500,
-            file_count=10, file_size_bytes=1024000,
-            model_dump=lambda: {"export_format": "yolo"},
-        ))
+        conversion.load_dataset = AsyncMock(
+            return_value=MagicMock(
+                image_count=100,
+                annotation_count=500,
+            )
+        )
+        conversion.convert_dataset = AsyncMock(
+            return_value=MagicMock(
+                id="canonical_001",
+                name="test",
+                image_count=100,
+                annotation_count=500,
+                class_count=10,
+            )
+        )
+        conversion.export_dataset = AsyncMock(
+            return_value=MagicMock(
+                export_format="yolo",
+                output_path="/out",
+                images_exported=100,
+                annotations_exported=500,
+                file_count=10,
+                file_size_bytes=1024000,
+                model_dump=lambda: {"export_format": "yolo"},
+            )
+        )
 
         quality = MagicMock()
-        quality.run_pipeline = AsyncMock(return_value=MagicMock(
-            dataset_name="test",
-            overall_score=MagicMock(
-                overall=85.5, letter_grade=MagicMock(value="B"),
-                production_ready=True,
-            ),
-            error_count=2, warning_count=5,
-        ))
+        quality.run_pipeline = AsyncMock(
+            return_value=MagicMock(
+                dataset_name="test",
+                overall_score=MagicMock(
+                    overall=85.5,
+                    letter_grade=MagicMock(value="B"),
+                    production_ready=True,
+                ),
+                error_count=2,
+                warning_count=5,
+            )
+        )
 
         training = MagicMock()
         training.run_pipeline.return_value = MagicMock(
-            experiment_id="exp_001", model_id="model_001",
-            total_epochs_completed=50, best_metric=0.85,
+            experiment_id="exp_001",
+            model_id="model_001",
+            total_epochs_completed=50,
+            best_metric=0.85,
             status="completed",
         )
 
@@ -121,7 +142,8 @@ class TestFirstIngestion:
 
     @pytest.mark.asyncio
     async def test_full_pipeline_first_run(
-        self, context: DatasetContext,
+        self,
+        context: DatasetContext,
     ) -> None:
         """Full pipeline completes on first run with normal discover."""
         catalog = MagicMock()
@@ -217,7 +239,8 @@ class TestRepeatedIngestion:
 
     @pytest.mark.asyncio
     async def test_downstream_stages_work_after_reuse(
-        self, context: DatasetContext,
+        self,
+        context: DatasetContext,
     ) -> None:
         """Mapping, conversion, and quality stages still work after catalog reuse."""
         catalog = MagicMock()
@@ -235,7 +258,8 @@ class TestRepeatedIngestion:
 
     @pytest.mark.asyncio
     async def test_catalog_stage_result_marks_reused(
-        self, context: DatasetContext,
+        self,
+        context: DatasetContext,
     ) -> None:
         """Catalog stage result indicates reuse."""
         catalog = MagicMock()

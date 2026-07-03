@@ -48,7 +48,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_full_pipeline_completes(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         assert result.status == PipelineStatus.COMPLETED
@@ -58,7 +60,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_full_pipeline_populates_context(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         assert result.context is not None
@@ -69,7 +73,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_full_pipeline_summary(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         assert result.summary.stages_total == 5
@@ -83,7 +89,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_skip_quality(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context, skip_quality=True)
         assert result.status == PipelineStatus.COMPLETED
@@ -94,7 +102,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_skip_training(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context, skip_training=True)
         assert result.status == PipelineStatus.COMPLETED
@@ -103,10 +113,14 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_skip_quality_and_training(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(
-            context, skip_quality=True, skip_training=True,
+            context,
+            skip_quality=True,
+            skip_training=True,
         )
         assert result.status == PipelineStatus.COMPLETED
         assert len(result.stages) == 5
@@ -117,7 +131,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_skip_nothing(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         assert len(result.stages) == 5
@@ -130,7 +146,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_dry_run_skips_all_stages(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context, dry_run=True)
         assert result.status == PipelineStatus.COMPLETED
@@ -143,7 +161,8 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_stage_failure_stops_pipeline(
-        self, context: DatasetContext,
+        self,
+        context: DatasetContext,
     ) -> None:
         failing_catalog = MagicMock()
         failing_catalog.discover.side_effect = RuntimeError("Catalog exploded")
@@ -157,7 +176,8 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_stage_failure_with_continue_on_error(
-        self, context: DatasetContext,
+        self,
+        context: DatasetContext,
     ) -> None:
         failing_catalog = MagicMock()
         failing_catalog.discover.side_effect = RuntimeError("Catalog exploded")
@@ -168,7 +188,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_mapping_failure_does_not_affect_catalog(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         assert result.stages[0].stage == "catalog"
@@ -176,7 +198,8 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_conversion_failure(
-        self, context: DatasetContext,
+        self,
+        context: DatasetContext,
     ) -> None:
         failing_conversion = MagicMock()
         failing_conversion.load_dataset.side_effect = RuntimeError("Conversion OOM")
@@ -195,7 +218,8 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_error_field_on_failure(
-        self, context: DatasetContext,
+        self,
+        context: DatasetContext,
     ) -> None:
         failing_catalog = MagicMock()
         failing_catalog.discover.side_effect = RuntimeError("Kaboom")
@@ -207,7 +231,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_no_error_on_success(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         assert result.error is None
@@ -218,7 +244,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_catalog_stage_has_entry_id(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         catalog_stage = next(s for s in result.stages if s.stage == "catalog")
@@ -227,7 +255,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_conversion_stage_has_dataset_metrics(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         conv_stage = next(s for s in result.stages if s.stage == "conversion")
@@ -238,7 +268,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_quality_stage_has_score(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         quality_stage = next(s for s in result.stages if s.stage == "quality")
@@ -248,7 +280,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_training_stage_has_experiment_id(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         training_stage = next(s for s in result.stages if s.stage == "training")
@@ -261,7 +295,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_stages_executed_in_order(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         stage_names = [s.stage for s in result.stages]
@@ -270,7 +306,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_stages_executed_in_order_with_skips(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context, skip_quality=True, skip_training=True)
         stage_names = [s.stage for s in result.stages]
@@ -282,7 +320,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_stage_duration_recorded(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         for stage in result.stages:
@@ -291,7 +331,9 @@ class TestDatasetWorkflow:
 
     @pytest.mark.asyncio
     async def test_total_duration_is_reasonable(
-        self, workflow: DatasetWorkflow, context: DatasetContext,
+        self,
+        workflow: DatasetWorkflow,
+        context: DatasetContext,
     ) -> None:
         result = await workflow.execute(context)
         assert result.summary.total_duration_seconds >= 0
@@ -313,23 +355,40 @@ class TestDatasetWorkflow:
         conversion = MagicMock()
         load_result = MagicMock(image_count=0, annotation_count=0)
         conversion.load_dataset = AsyncMock(return_value=load_result)
-        conversion.convert_dataset = AsyncMock(return_value=MagicMock(
-            id="test", name="empty", image_count=0, annotation_count=0, class_count=0,
-        ))
-        conversion.export_dataset = AsyncMock(return_value=MagicMock(
-            export_format="yolo", output_path="/out", images_exported=0,
-            annotations_exported=0, file_count=0, file_size_bytes=0,
-            model_dump=lambda: {},
-        ))
+        conversion.convert_dataset = AsyncMock(
+            return_value=MagicMock(
+                id="test",
+                name="empty",
+                image_count=0,
+                annotation_count=0,
+                class_count=0,
+            )
+        )
+        conversion.export_dataset = AsyncMock(
+            return_value=MagicMock(
+                export_format="yolo",
+                output_path="/out",
+                images_exported=0,
+                annotations_exported=0,
+                file_count=0,
+                file_size_bytes=0,
+                model_dump=lambda: {},
+            )
+        )
         quality_score = MagicMock(
-            overall=100.0, letter_grade=MagicMock(value="A"), production_ready=True,
+            overall=100.0,
+            letter_grade=MagicMock(value="A"),
+            production_ready=True,
         )
         quality = MagicMock()
-        quality.run_pipeline = AsyncMock(return_value=MagicMock(
-            dataset_name="empty",
-            overall_score=quality_score,
-            error_count=0, warning_count=0,
-        ))
+        quality.run_pipeline = AsyncMock(
+            return_value=MagicMock(
+                dataset_name="empty",
+                overall_score=quality_score,
+                error_count=0,
+                warning_count=0,
+            )
+        )
         wf = DatasetWorkflow(
             catalog_service=MagicMock(),
             ontology_service=ontology,
@@ -353,23 +412,40 @@ class TestDatasetWorkflow:
         conversion = MagicMock()
         load_result = MagicMock(image_count=0, annotation_count=0)
         conversion.load_dataset = AsyncMock(return_value=load_result)
-        conversion.convert_dataset = AsyncMock(return_value=MagicMock(
-            id="test", name="unknown", image_count=0, annotation_count=0, class_count=0,
-        ))
-        conversion.export_dataset = AsyncMock(return_value=MagicMock(
-            export_format="yolo", output_path="/out", images_exported=0,
-            annotations_exported=0, file_count=0, file_size_bytes=0,
-            model_dump=lambda: {},
-        ))
+        conversion.convert_dataset = AsyncMock(
+            return_value=MagicMock(
+                id="test",
+                name="unknown",
+                image_count=0,
+                annotation_count=0,
+                class_count=0,
+            )
+        )
+        conversion.export_dataset = AsyncMock(
+            return_value=MagicMock(
+                export_format="yolo",
+                output_path="/out",
+                images_exported=0,
+                annotations_exported=0,
+                file_count=0,
+                file_size_bytes=0,
+                model_dump=lambda: {},
+            )
+        )
         quality_score = MagicMock(
-            overall=100.0, letter_grade=MagicMock(value="A"), production_ready=True,
+            overall=100.0,
+            letter_grade=MagicMock(value="A"),
+            production_ready=True,
         )
         quality = MagicMock()
-        quality.run_pipeline = AsyncMock(return_value=MagicMock(
-            dataset_name="unknown",
-            overall_score=quality_score,
-            error_count=0, warning_count=0,
-        ))
+        quality.run_pipeline = AsyncMock(
+            return_value=MagicMock(
+                dataset_name="unknown",
+                overall_score=quality_score,
+                error_count=0,
+                warning_count=0,
+            )
+        )
         wf = DatasetWorkflow(
             catalog_service=MagicMock(),
             ontology_service=ontology,

@@ -19,17 +19,22 @@ class TestPipelineService:
         mock_catalog_service: MagicMock,
     ) -> PipelineService:
         ingestor = MagicMock()
+
         async def _ingest(dataset_name: str = "", **kw: object) -> MagicMock:
             return MagicMock(
                 status=PipelineStatus.COMPLETED,
                 dataset_name=dataset_name,
                 stages=[],
                 summary=MagicMock(
-                    stages_completed=0, stages_failed=0, stages_skipped=0, stages_total=0,
+                    stages_completed=0,
+                    stages_failed=0,
+                    stages_skipped=0,
+                    stages_total=0,
                 ),
                 error=None,
                 context=None,
             )
+
         ingestor.ingest = _ingest
         return PipelineService(ingestor=ingestor, workflow=mock_workflow)
 
@@ -39,7 +44,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_ingest_dataset(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.ingest_dataset(
             dataset_name="test_dataset",
@@ -49,7 +56,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_ingest_dataset_with_skip_training(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.ingest_dataset(
             dataset_name="test_dataset",
@@ -60,7 +69,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_ingest_dataset_with_skip_quality(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.ingest_dataset(
             dataset_name="test_dataset",
@@ -71,7 +82,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_ingest_dataset_dry_run(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.ingest_dataset(
             dataset_name="test_dataset",
@@ -82,7 +95,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_ingest_dataset_continue_on_error(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.ingest_dataset(
             dataset_name="test_dataset",
@@ -97,7 +112,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_run_catalog(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.run_catalog(
             dataset_name="test_dataset",
@@ -107,7 +124,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_run_catalog_dry_run(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.run_catalog(
             dataset_name="test_dataset",
@@ -123,7 +142,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_run_conversion(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.run_conversion(
             dataset_name="test_dataset",
@@ -147,7 +168,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_run_full_pipeline(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.run_full_pipeline(
             dataset_name="test_dataset",
@@ -157,7 +180,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_run_full_pipeline_with_skips(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.run_full_pipeline(
             dataset_name="test_dataset",
@@ -169,7 +194,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_run_full_pipeline_dry_run(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.run_full_pipeline(
             dataset_name="test_dataset",
@@ -184,7 +211,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_result_has_dataset_name(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.ingest_dataset(
             dataset_name="custom_name",
@@ -194,7 +223,9 @@ class TestPipelineService:
 
     @pytest.mark.asyncio
     async def test_result_has_summary(
-        self, service: PipelineService, temp_source_dir: Path,
+        self,
+        service: PipelineService,
+        temp_source_dir: Path,
     ) -> None:
         result = await service.ingest_dataset(
             dataset_name="test_dataset",

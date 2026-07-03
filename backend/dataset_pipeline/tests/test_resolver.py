@@ -145,34 +145,58 @@ class TestResolveFromAnnotationFiles:
 
 class TestResolveFromNameHeuristics:
     def test_coco_in_path_name(self) -> None:
-        assert DatasetFormatResolver.resolve(
-            None, Path("/data/coco2017"),
-        ) == "coco_json"
+        assert (
+            DatasetFormatResolver.resolve(
+                None,
+                Path("/data/coco2017"),
+            )
+            == "coco_json"
+        )
 
     def test_yolo_in_path_name(self) -> None:
-        assert DatasetFormatResolver.resolve(
-            None, Path("/data/yolo_dataset"),
-        ) == "yolo_txt"
+        assert (
+            DatasetFormatResolver.resolve(
+                None,
+                Path("/data/yolo_dataset"),
+            )
+            == "yolo_txt"
+        )
 
     def test_darknet_in_path_name(self) -> None:
-        assert DatasetFormatResolver.resolve(
-            None, Path("/data/darknet_data"),
-        ) == "yolo_txt"
+        assert (
+            DatasetFormatResolver.resolve(
+                None,
+                Path("/data/darknet_data"),
+            )
+            == "yolo_txt"
+        )
 
     def test_voc_in_path_name(self) -> None:
-        assert DatasetFormatResolver.resolve(
-            None, Path("/data/VOCdevkit"),
-        ) == "pascal_voc"
+        assert (
+            DatasetFormatResolver.resolve(
+                None,
+                Path("/data/VOCdevkit"),
+            )
+            == "pascal_voc"
+        )
 
     def test_pascal_in_path_name(self) -> None:
-        assert DatasetFormatResolver.resolve(
-            None, Path("/data/pascal_voc"),
-        ) == "pascal_voc"
+        assert (
+            DatasetFormatResolver.resolve(
+                None,
+                Path("/data/pascal_voc"),
+            )
+            == "pascal_voc"
+        )
 
     def test_default_to_coco_json(self) -> None:
-        assert DatasetFormatResolver.resolve(
-            None, Path("/data/random_dataset"),
-        ) == "coco_json"
+        assert (
+            DatasetFormatResolver.resolve(
+                None,
+                Path("/data/random_dataset"),
+            )
+            == "coco_json"
+        )
 
     def test_json_file_path(self, tmp_path: Path) -> None:
         f = tmp_path / "annotations.json"

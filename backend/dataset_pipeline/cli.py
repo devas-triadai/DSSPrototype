@@ -69,13 +69,18 @@ def cmd_ingest(
     skip_quality: bool = typer.Option(False, "--skip-quality", help="Skip quality checks"),
     skip_training: bool = typer.Option(False, "--skip-training", help="Skip training"),
     continue_on_error: bool = typer.Option(
-        False, "--continue-on-error", help="Continue on stage failure",
+        False,
+        "--continue-on-error",
+        help="Continue on stage failure",
     ),
     dry_run: bool = typer.Option(False, "--dry-run", help="Validate without executing"),
     force: bool = typer.Option(False, "--force", help="Force re-create catalog entry"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose logging"),
     config_path: Optional[str] = typer.Option(
-        None, "--config", "-c", help="Config file path (not yet implemented)",
+        None,
+        "--config",
+        "-c",
+        help="Config file path (not yet implemented)",
     ),
 ) -> None:
     """Ingest a dataset through the full pipeline."""
@@ -114,7 +119,10 @@ def cmd_catalog(
     service = _build_service()
     result = asyncio.run(
         service.run_catalog(
-            dataset_name=dataset, source_path=Path(source), dry_run=dry_run, force=force,
+            dataset_name=dataset,
+            source_path=Path(source),
+            dry_run=dry_run,
+            force=force,
         ),
     )
     _print_result(result)
@@ -189,13 +197,18 @@ def cmd_pipeline(
     skip_quality: bool = typer.Option(False, "--skip-quality", help="Skip quality checks"),
     skip_training: bool = typer.Option(False, "--skip-training", help="Skip training"),
     continue_on_error: bool = typer.Option(
-        False, "--continue-on-error", help="Continue on stage failure",
+        False,
+        "--continue-on-error",
+        help="Continue on stage failure",
     ),
     dry_run: bool = typer.Option(False, "--dry-run", help="Validate without executing"),
     force: bool = typer.Option(False, "--force", help="Force re-create catalog entry"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose logging"),
     config_path: Optional[str] = typer.Option(
-        None, "--config", "-c", help="Config file path (not yet implemented)",
+        None,
+        "--config",
+        "-c",
+        help="Config file path (not yet implemented)",
     ),
 ) -> None:
     """Run the full dataset pipeline (alias for ingest)."""

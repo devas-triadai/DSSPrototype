@@ -90,7 +90,10 @@ class DatasetIngestor(DatasetIngestorInterface):
         """Ingest a dataset through the entire pipeline."""
         logger.info(
             "Ingestion started | dataset=%s | source=%s | dry_run=%s | force=%s",
-            dataset_name, source_path, dry_run, force,
+            dataset_name,
+            source_path,
+            dry_run,
+            force,
         )
 
         source_path = source_path.resolve()
@@ -126,9 +129,9 @@ class DatasetIngestor(DatasetIngestorInterface):
         else:
             logger.warning(
                 "Pipeline finished with status=%s | dataset=%s | errors=%s",
-                result.status, dataset_name, result.error,
+                result.status,
+                dataset_name,
+                result.error,
             )
 
         return result
-
-

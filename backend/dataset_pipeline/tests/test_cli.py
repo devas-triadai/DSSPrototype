@@ -39,7 +39,8 @@ def mock_service() -> MagicMock:
         PipelineStageResult(stage="conversion", status=PipelineStatus.COMPLETED),
     ]
     result = PipelineResult(
-        status=PipelineStatus.COMPLETED, dataset_name="test_dataset",
+        status=PipelineStatus.COMPLETED,
+        dataset_name="test_dataset",
         stages=all_stages,
     )
     svc.ingest_dataset = AsyncMock(return_value=result)
@@ -60,7 +61,9 @@ def mock_service() -> MagicMock:
 class TestCLIIngest:
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_ingest_basic(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
@@ -73,90 +76,133 @@ class TestCLIIngest:
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_ingest_skip_training(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
         result = runner.invoke(
             app,
             [
-                "dataset", "ingest", "--dataset", "coco2017",
-                "--source", "/data/coco2017", "--skip-training",
+                "dataset",
+                "ingest",
+                "--dataset",
+                "coco2017",
+                "--source",
+                "/data/coco2017",
+                "--skip-training",
             ],
         )
         assert result.exit_code == 0
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_ingest_skip_quality(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
         result = runner.invoke(
             app,
             [
-                "dataset", "ingest", "--dataset", "coco2017",
-                "--source", "/data/coco2017", "--skip-quality",
+                "dataset",
+                "ingest",
+                "--dataset",
+                "coco2017",
+                "--source",
+                "/data/coco2017",
+                "--skip-quality",
             ],
         )
         assert result.exit_code == 0
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_ingest_dry_run(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
         result = runner.invoke(
             app,
             [
-                "dataset", "ingest", "--dataset", "coco2017",
-                "--source", "/data/coco2017", "--dry-run",
+                "dataset",
+                "ingest",
+                "--dataset",
+                "coco2017",
+                "--source",
+                "/data/coco2017",
+                "--dry-run",
             ],
         )
         assert result.exit_code == 0
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_ingest_verbose(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
         result = runner.invoke(
             app,
             [
-                "dataset", "ingest", "--dataset", "coco2017",
-                "--source", "/data/coco2017", "--verbose",
+                "dataset",
+                "ingest",
+                "--dataset",
+                "coco2017",
+                "--source",
+                "/data/coco2017",
+                "--verbose",
             ],
         )
         assert result.exit_code == 0
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_ingest_output_dir(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
         result = runner.invoke(
             app,
             [
-                "dataset", "ingest", "--dataset", "coco2017",
-                "--source", "/data/coco2017", "--output", "/out",
+                "dataset",
+                "ingest",
+                "--dataset",
+                "coco2017",
+                "--source",
+                "/data/coco2017",
+                "--output",
+                "/out",
             ],
         )
         assert result.exit_code == 0
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_ingest_continue_on_error(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
         result = runner.invoke(
             app,
             [
-                "dataset", "ingest", "--dataset", "coco2017",
-                "--source", "/data/coco2017", "--continue-on-error",
+                "dataset",
+                "ingest",
+                "--dataset",
+                "coco2017",
+                "--source",
+                "/data/coco2017",
+                "--continue-on-error",
             ],
         )
         assert result.exit_code == 0
@@ -165,7 +211,9 @@ class TestCLIIngest:
 class TestCLISingleStage:
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_catalog(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
@@ -177,22 +225,31 @@ class TestCLISingleStage:
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_catalog_dry_run(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
         result = runner.invoke(
             app,
             [
-                "dataset", "catalog", "--dataset", "coco2017",
-                "--source", "/data/coco2017", "--dry-run",
+                "dataset",
+                "catalog",
+                "--dataset",
+                "coco2017",
+                "--source",
+                "/data/coco2017",
+                "--dry-run",
             ],
         )
         assert result.exit_code == 0
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_map(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
@@ -201,7 +258,9 @@ class TestCLISingleStage:
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_convert(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
@@ -213,7 +272,9 @@ class TestCLISingleStage:
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_quality(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
@@ -222,7 +283,9 @@ class TestCLISingleStage:
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_train(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
@@ -233,7 +296,9 @@ class TestCLISingleStage:
 class TestCLIPipeline:
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_pipeline_basic(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
@@ -245,17 +310,28 @@ class TestCLIPipeline:
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_pipeline_all_flags(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
         result = runner.invoke(
             app,
             [
-                "dataset", "pipeline", "--dataset", "coco2017",
-                "--source", "/data/coco2017", "--skip-quality",
-                "--skip-training", "--continue-on-error", "--dry-run",
-                "--verbose", "--output", "/out",
+                "dataset",
+                "pipeline",
+                "--dataset",
+                "coco2017",
+                "--source",
+                "/data/coco2017",
+                "--skip-quality",
+                "--skip-training",
+                "--continue-on-error",
+                "--dry-run",
+                "--verbose",
+                "--output",
+                "/out",
             ],
         )
         assert result.exit_code == 0
@@ -264,7 +340,9 @@ class TestCLIPipeline:
 class TestCLIOutput:
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_shows_pipeline_result(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
@@ -277,7 +355,9 @@ class TestCLIOutput:
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_shows_stages(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
@@ -291,7 +371,9 @@ class TestCLIOutput:
 
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_shows_summary(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service
@@ -305,7 +387,9 @@ class TestCLIOutput:
 class TestCLIError:
     @patch("backend.dataset_pipeline.cli.PipelineService")
     def test_missing_required_option(
-        self, mock_svc_cls: MagicMock, mock_service: MagicMock,
+        self,
+        mock_svc_cls: MagicMock,
+        mock_service: MagicMock,
         runner: CliRunner,
     ) -> None:
         mock_svc_cls.return_value = mock_service

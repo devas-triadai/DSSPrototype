@@ -33,11 +33,7 @@ def _single_stage_result(
     stage: PipelineStageResult,
     context: DatasetContext,
 ) -> PipelineResult:
-    status = (
-        PipelineStatus.COMPLETED
-        if stage.status == PipelineStatus.COMPLETED
-        else stage.status
-    )
+    status = PipelineStatus.COMPLETED if stage.status == PipelineStatus.COMPLETED else stage.status
     return PipelineResult(
         status=status,
         dataset_name=dataset_name,

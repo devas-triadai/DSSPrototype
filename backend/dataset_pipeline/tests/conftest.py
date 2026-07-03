@@ -19,6 +19,7 @@ from backend.dataset_pipeline.models import (
 # Sample models
 # ------------------------------------------------------------------
 
+
 @pytest.fixture
 def sample_dataset_context() -> DatasetContext:
     return DatasetContext(
@@ -72,7 +73,9 @@ def sample_pipeline_result_failed(sample_dataset_context: DatasetContext) -> Pip
         stages=[
             PipelineStageResult(stage="catalog", status=PipelineStatus.COMPLETED),
             PipelineStageResult(
-                stage="mapping", status=PipelineStatus.FAILED, error="Mapping error",
+                stage="mapping",
+                status=PipelineStatus.FAILED,
+                error="Mapping error",
             ),
         ],
         context=sample_dataset_context,
@@ -83,6 +86,7 @@ def sample_pipeline_result_failed(sample_dataset_context: DatasetContext) -> Pip
 # ------------------------------------------------------------------
 # Mock services
 # ------------------------------------------------------------------
+
 
 @pytest.fixture
 def mock_catalog_service() -> MagicMock:
@@ -100,15 +104,17 @@ def mock_catalog_service() -> MagicMock:
 def mock_ontology_service() -> MagicMock:
     svc = MagicMock()
     svc.register_dataset = AsyncMock()
-    svc.map_dataset = AsyncMock(return_value=[
-        MagicMock(
-            source_label="car",
-            canonical_value="vehicle.car",
-            canonical_name="Car",
-            confidence=0.95,
-            model_dump=lambda: {"source_label": "car"},
-        ),
-    ])
+    svc.map_dataset = AsyncMock(
+        return_value=[
+            MagicMock(
+                source_label="car",
+                canonical_value="vehicle.car",
+                canonical_name="Car",
+                confidence=0.95,
+                model_dump=lambda: {"source_label": "car"},
+            ),
+        ]
+    )
     return svc
 
 
@@ -175,46 +181,65 @@ def mock_training_service() -> MagicMock:
 @pytest.fixture
 def mock_workflow(mock_catalog_service: MagicMock) -> MagicMock:
     wf = MagicMock()
-    wf.execute = AsyncMock(return_value=PipelineResult(
-        status=PipelineStatus.COMPLETED,
-        dataset_name="test_dataset",
-        stages=[
-            PipelineStageResult(stage="catalog", status=PipelineStatus.COMPLETED),
-            PipelineStageResult(stage="mapping", status=PipelineStatus.COMPLETED),
-            PipelineStageResult(stage="conversion", status=PipelineStatus.COMPLETED),
-            PipelineStageResult(stage="quality", status=PipelineStatus.COMPLETED),
-            PipelineStageResult(stage="training", status=PipelineStatus.COMPLETED),
-        ],
-    ))
+    wf.execute = AsyncMock(
+        return_value=PipelineResult(
+            status=PipelineStatus.COMPLETED,
+            dataset_name="test_dataset",
+            stages=[
+                PipelineStageResult(stage="catalog", status=PipelineStatus.COMPLETED),
+                PipelineStageResult(stage="mapping", status=PipelineStatus.COMPLETED),
+                PipelineStageResult(stage="conversion", status=PipelineStatus.COMPLETED),
+                PipelineStageResult(stage="quality", status=PipelineStatus.COMPLETED),
+                PipelineStageResult(stage="training", status=PipelineStatus.COMPLETED),
+            ],
+        )
+    )
     completed_stage = PipelineStageResult(
-        stage="catalog", status=PipelineStatus.COMPLETED,
-        result={"entry_id": "test_entry"}, duration_seconds=0.1,
+        stage="catalog",
+        status=PipelineStatus.COMPLETED,
+        result={"entry_id": "test_entry"},
+        duration_seconds=0.1,
     )
     wf._run_catalog_stage = AsyncMock(return_value=completed_stage)
-    wf._run_mapping_stage = AsyncMock(return_value=PipelineStageResult(
-        stage="mapping", status=PipelineStatus.COMPLETED,
-        result={"labels_mapped": 1}, duration_seconds=0.1,
-    ))
-    wf._run_conversion_stage = AsyncMock(return_value=PipelineStageResult(
-        stage="conversion", status=PipelineStatus.COMPLETED,
-        result={"images": 100, "annotations": 500, "classes": 10},
-        duration_seconds=0.1,
-    ))
-    wf._run_quality_stage = AsyncMock(return_value=PipelineStageResult(
-        stage="quality", status=PipelineStatus.COMPLETED,
-        result={"quality_score": 85.5, "letter_grade": "B"},
-        duration_seconds=0.1,
-    ))
-    wf._run_training_stage = AsyncMock(return_value=PipelineStageResult(
-        stage="training", status=PipelineStatus.COMPLETED,
-        result={"experiment_id": "exp_001"}, duration_seconds=0.1,
-    ))
+    wf._run_mapping_stage = AsyncMock(
+        return_value=PipelineStageResult(
+            stage="mapping",
+            status=PipelineStatus.COMPLETED,
+            result={"labels_mapped": 1},
+            duration_seconds=0.1,
+        )
+    )
+    wf._run_conversion_stage = AsyncMock(
+        return_value=PipelineStageResult(
+            stage="conversion",
+            status=PipelineStatus.COMPLETED,
+            result={"images": 100, "annotations": 500, "classes": 10},
+            duration_seconds=0.1,
+        )
+    )
+    wf._run_quality_stage = AsyncMock(
+        return_value=PipelineStageResult(
+            stage="quality",
+            status=PipelineStatus.COMPLETED,
+            result={"quality_score": 85.5, "letter_grade": "B"},
+            duration_seconds=0.1,
+        )
+    )
+    wf._run_training_stage = AsyncMock(
+        return_value=PipelineStageResult(
+            stage="training",
+            status=PipelineStatus.COMPLETED,
+            result={"experiment_id": "exp_001"},
+            duration_seconds=0.1,
+        )
+    )
     return wf
 
 
 # ------------------------------------------------------------------
 # Temp directories
 # ------------------------------------------------------------------
+
 
 @pytest.fixture
 def temp_source_dir(tmp_path: Path) -> Path:

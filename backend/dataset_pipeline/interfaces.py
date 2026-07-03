@@ -20,8 +20,7 @@ class WorkflowInterface(ABC):
         continue_on_error: bool = False,
         dry_run: bool = False,
         force: bool = False,
-    ) -> PipelineResult:
-        ...
+    ) -> PipelineResult: ...
 
 
 class PipelineServiceInterface(ABC):
@@ -39,8 +38,7 @@ class PipelineServiceInterface(ABC):
         dry_run: bool = False,
         output_dir: Path | None = None,
         force: bool = False,
-    ) -> PipelineResult:
-        ...
+    ) -> PipelineResult: ...
 
     @abstractmethod
     async def run_catalog(
@@ -50,8 +48,7 @@ class PipelineServiceInterface(ABC):
         *,
         dry_run: bool = False,
         force: bool = False,
-    ) -> PipelineResult:
-        ...
+    ) -> PipelineResult: ...
 
     @abstractmethod
     async def run_mapping(
@@ -60,8 +57,7 @@ class PipelineServiceInterface(ABC):
         *,
         dry_run: bool = False,
         force: bool = False,
-    ) -> PipelineResult:
-        ...
+    ) -> PipelineResult: ...
 
     @abstractmethod
     async def run_conversion(
@@ -71,8 +67,7 @@ class PipelineServiceInterface(ABC):
         *,
         dry_run: bool = False,
         force: bool = False,
-    ) -> PipelineResult:
-        ...
+    ) -> PipelineResult: ...
 
     @abstractmethod
     async def run_quality(
@@ -81,8 +76,7 @@ class PipelineServiceInterface(ABC):
         *,
         dry_run: bool = False,
         force: bool = False,
-    ) -> PipelineResult:
-        ...
+    ) -> PipelineResult: ...
 
     @abstractmethod
     async def run_training(
@@ -91,8 +85,7 @@ class PipelineServiceInterface(ABC):
         *,
         dry_run: bool = False,
         force: bool = False,
-    ) -> PipelineResult:
-        ...
+    ) -> PipelineResult: ...
 
     @abstractmethod
     async def run_full_pipeline(
@@ -106,8 +99,7 @@ class PipelineServiceInterface(ABC):
         dry_run: bool = False,
         output_dir: Path | None = None,
         force: bool = False,
-    ) -> PipelineResult:
-        ...
+    ) -> PipelineResult: ...
 
 
 class DatasetIngestorInterface(ABC):
@@ -125,8 +117,7 @@ class DatasetIngestorInterface(ABC):
         dry_run: bool = False,
         output_dir: Path | None = None,
         force: bool = False,
-    ) -> PipelineResult:
-        ...
+    ) -> PipelineResult: ...
 
     @abstractmethod
     async def validate_source(self, source_path: Path) -> DatasetLayout:

@@ -25,12 +25,14 @@ class TestDatasetIngestor:
     @pytest.fixture
     def mock_workflow(self) -> MagicMock:
         wf = MagicMock()
+
         async def _execute(context: DatasetContext, **kw: Any) -> PipelineResult:
             return PipelineResult(
                 status=PipelineStatus.COMPLETED,
                 dataset_name=context.dataset_name,
                 stages=[],
             )
+
         wf.execute = _execute
         return wf
 
@@ -44,7 +46,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_ingest_completes(
-        self, ingestor: DatasetIngestor, temp_source_dir: Path,
+        self,
+        ingestor: DatasetIngestor,
+        temp_source_dir: Path,
     ) -> None:
         result = await ingestor.ingest(
             dataset_name="test_dataset",
@@ -54,7 +58,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_ingest_with_skip_quality(
-        self, ingestor: DatasetIngestor, temp_source_dir: Path,
+        self,
+        ingestor: DatasetIngestor,
+        temp_source_dir: Path,
     ) -> None:
         result = await ingestor.ingest(
             dataset_name="test_dataset",
@@ -65,7 +71,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_ingest_with_skip_training(
-        self, ingestor: DatasetIngestor, temp_source_dir: Path,
+        self,
+        ingestor: DatasetIngestor,
+        temp_source_dir: Path,
     ) -> None:
         result = await ingestor.ingest(
             dataset_name="test_dataset",
@@ -76,7 +84,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_ingest_with_continue_on_error(
-        self, ingestor: DatasetIngestor, temp_source_dir: Path,
+        self,
+        ingestor: DatasetIngestor,
+        temp_source_dir: Path,
     ) -> None:
         result = await ingestor.ingest(
             dataset_name="test_dataset",
@@ -87,7 +97,10 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_ingest_with_output_dir(
-        self, ingestor: DatasetIngestor, temp_source_dir: Path, tmp_path: Path,
+        self,
+        ingestor: DatasetIngestor,
+        temp_source_dir: Path,
+        tmp_path: Path,
     ) -> None:
         output_dir = tmp_path / "output"
         result = await ingestor.ingest(
@@ -103,7 +116,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_ingest_dry_run(
-        self, ingestor: DatasetIngestor, temp_source_dir: Path,
+        self,
+        ingestor: DatasetIngestor,
+        temp_source_dir: Path,
     ) -> None:
         result = await ingestor.ingest(
             dataset_name="test_dataset",
@@ -118,7 +133,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_validate_source_with_directory(
-        self, ingestor: DatasetIngestor, temp_source_dir: Path,
+        self,
+        ingestor: DatasetIngestor,
+        temp_source_dir: Path,
     ) -> None:
         layout = await ingestor.validate_source(temp_source_dir)
         assert isinstance(layout, DatasetLayout)
@@ -127,7 +144,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_validate_source_with_json_file(
-        self, ingestor: DatasetIngestor, tmp_path: Path,
+        self,
+        ingestor: DatasetIngestor,
+        tmp_path: Path,
     ) -> None:
         json_file = tmp_path / "coco_annotations.json"
         json_file.write_text('{"images": []}')
@@ -137,7 +156,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_validate_source_with_yaml_file(
-        self, ingestor: DatasetIngestor, tmp_path: Path,
+        self,
+        ingestor: DatasetIngestor,
+        tmp_path: Path,
     ) -> None:
         yaml_file = tmp_path / "data.yaml"
         yaml_file.write_text("train: ./images/train")
@@ -147,7 +168,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_validate_source_accepts_any_directory_with_images(
-        self, ingestor: DatasetIngestor, tmp_path: Path,
+        self,
+        ingestor: DatasetIngestor,
+        tmp_path: Path,
     ) -> None:
         src = tmp_path / "my_dataset"
         src.mkdir()
@@ -170,14 +193,17 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_validate_nonexistent_source(
-        self, ingestor: DatasetIngestor,
+        self,
+        ingestor: DatasetIngestor,
     ) -> None:
         with pytest.raises(DatasetNotFoundError):
             await ingestor.validate_source(Path("/does/not/exist"))
 
     @pytest.mark.asyncio
     async def test_validate_source_empty_directory(
-        self, ingestor: DatasetIngestor, tmp_path: Path,
+        self,
+        ingestor: DatasetIngestor,
+        tmp_path: Path,
     ) -> None:
         empty_dir = tmp_path / "empty"
         empty_dir.mkdir()
@@ -186,7 +212,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_validate_source_unsupported_file_type(
-        self, ingestor: DatasetIngestor, tmp_path: Path,
+        self,
+        ingestor: DatasetIngestor,
+        tmp_path: Path,
     ) -> None:
         bad_file = tmp_path / "data.zip"
         bad_file.write_text("nope")
@@ -199,7 +227,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_ingestor_returns_pipeline_result(
-        self, ingestor: DatasetIngestor, temp_source_dir: Path,
+        self,
+        ingestor: DatasetIngestor,
+        temp_source_dir: Path,
     ) -> None:
         result = await ingestor.ingest(
             dataset_name="test_dataset",
@@ -209,7 +239,9 @@ class TestDatasetIngestor:
 
     @pytest.mark.asyncio
     async def test_ingestor_sets_dataset_name(
-        self, ingestor: DatasetIngestor, temp_source_dir: Path,
+        self,
+        ingestor: DatasetIngestor,
+        temp_source_dir: Path,
     ) -> None:
         result = await ingestor.ingest(
             dataset_name="custom_name",

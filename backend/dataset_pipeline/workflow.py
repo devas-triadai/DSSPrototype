@@ -19,6 +19,10 @@ from backend.dataset_catalog.service import DatasetCatalogService
 from backend.dataset_conversion.models import CanonicalDataset, LoadResult
 from backend.dataset_conversion.service import DatasetConversionService
 from backend.dataset_pipeline.config import pipeline_config
+from backend.dataset_pipeline.conversion_request_builder import (
+    ConversionRequest,
+    ConversionRequestBuilder,
+)
 from backend.dataset_pipeline.exceptions import StageExecutionError
 from backend.dataset_pipeline.interfaces import WorkflowInterface
 from backend.dataset_pipeline.models import (
@@ -29,7 +33,6 @@ from backend.dataset_pipeline.models import (
     PipelineStageResult,
     PipelineStatus,
 )
-from backend.dataset_pipeline.resolver import DatasetFormatResolver
 from backend.dataset_quality.models import QualityReport
 from backend.dataset_quality.service import DatasetQualityService
 from backend.ontology_mapping.models import DatasetProfile as OntoDatasetProfile
@@ -84,7 +87,11 @@ class DatasetWorkflow(WorkflowInterface):
                 overall_status = s1.status
                 overall_error = s1.error
                 return self._build_result(
-                    context, stages, overall_status, overall_error, start_time,
+                    context,
+                    stages,
+                    overall_status,
+                    overall_error,
+                    start_time,
                 )
 
             s2 = await self._run_mapping_stage(context, dry_run)
@@ -93,7 +100,11 @@ class DatasetWorkflow(WorkflowInterface):
                 overall_status = s2.status
                 overall_error = s2.error
                 return self._build_result(
-                    context, stages, overall_status, overall_error, start_time,
+                    context,
+                    stages,
+                    overall_status,
+                    overall_error,
+                    start_time,
                 )
 
             s3 = await self._run_conversion_stage(context, dry_run)
@@ -102,7 +113,11 @@ class DatasetWorkflow(WorkflowInterface):
                 overall_status = s3.status
                 overall_error = s3.error
                 return self._build_result(
-                    context, stages, overall_status, overall_error, start_time,
+                    context,
+                    stages,
+                    overall_status,
+                    overall_error,
+                    start_time,
                 )
 
             if not skip_quality:
@@ -112,12 +127,14 @@ class DatasetWorkflow(WorkflowInterface):
                     overall_status = s4.status
                     overall_error = s4.error
                     return self._build_result(
-                        context, stages, overall_status, overall_error, start_time,
+                        context,
+                        stages,
+                        overall_status,
+                        overall_error,
+                        start_time,
                     )
             else:
-                stages.append(
-                    PipelineStageResult(stage="quality", status=PipelineStatus.SKIPPED)
-                )
+                stages.append(PipelineStageResult(stage="quality", status=PipelineStatus.SKIPPED))
 
             if not skip_training:
                 s5 = await self._run_training_stage(context, dry_run)
@@ -126,12 +143,14 @@ class DatasetWorkflow(WorkflowInterface):
                     overall_status = s5.status
                     overall_error = s5.error
                     return self._build_result(
-                        context, stages, overall_status, overall_error, start_time,
+                        context,
+                        stages,
+                        overall_status,
+                        overall_error,
+                        start_time,
                     )
             else:
-                stages.append(
-                    PipelineStageResult(stage="training", status=PipelineStatus.SKIPPED)
-                )
+                stages.append(PipelineStageResult(stage="training", status=PipelineStatus.SKIPPED))
 
             overall_status = PipelineStatus.COMPLETED
 
@@ -154,7 +173,10 @@ class DatasetWorkflow(WorkflowInterface):
     # ------------------------------------------------------------------
 
     async def _run_catalog_stage(
-        self, context: DatasetContext, dry_run: bool, force: bool = False,
+        self,
+        context: DatasetContext,
+        dry_run: bool,
+        force: bool = False,
     ) -> PipelineStageResult:
         logger.info("Registering dataset in catalog...")
         stage_start = time.monotonic()
@@ -223,7 +245,9 @@ class DatasetWorkflow(WorkflowInterface):
             )
 
     async def _run_mapping_stage(
-        self, context: DatasetContext, dry_run: bool,
+        self,
+        context: DatasetContext,
+        dry_run: bool,
     ) -> PipelineStageResult:
         logger.info("Mapping ontology...")
         stage_start = time.monotonic()
@@ -252,7 +276,8 @@ class DatasetWorkflow(WorkflowInterface):
 
             await self._ontology.register_dataset(onto_profile, [])
             results: list[MappingResult] = await self._ontology.map_dataset(
-                context.dataset_name, labels,
+                context.dataset_name,
+                labels,
             )
 
             context.metadata["mapping_results"] = [r.model_dump() for r in results]
@@ -276,7 +301,9 @@ class DatasetWorkflow(WorkflowInterface):
             )
 
     async def _run_conversion_stage(
-        self, context: DatasetContext, dry_run: bool,
+        self,
+        context: DatasetContext,
+        dry_run: bool,
     ) -> PipelineStageResult:
         logger.info("Converting dataset...")
         stage_start = time.monotonic()
@@ -288,20 +315,24 @@ class DatasetWorkflow(WorkflowInterface):
                     details={"dry_run": True},
                 )
 
-            output_path = str(
-                Path(pipeline_config.conversion_output_dir) / context.dataset_name
-            )
+            output_path = str(Path(pipeline_config.conversion_output_dir) / context.dataset_name)
 
             layout_data = context.metadata.get("dataset_layout")
             if layout_data is not None:
                 layout = DatasetLayout(**layout_data)
-                source_format = DatasetFormatResolver.resolve(layout, context.source_path)
+                request: ConversionRequest = ConversionRequestBuilder().build(layout)
+                load_path = request.source_path
+                source_format = request.dataset_format
+                load_kwargs = dict(request.kwargs)
             else:
                 source_format = context.dataset_type or self._detect_format(context.source_path)
+                load_path = str(context.source_path)
+                load_kwargs = {}
 
             load_result: LoadResult = await self._conversion.load_dataset(
-                path=str(context.source_path),
+                path=load_path,
                 dataset_format=source_format,
+                **load_kwargs,
             )
 
             canonical: CanonicalDataset = await self._conversion.convert_dataset(
@@ -321,7 +352,8 @@ class DatasetWorkflow(WorkflowInterface):
 
             logger.info(
                 "Conversion complete: %d images, %d annotations",
-                canonical.image_count, canonical.annotation_count,
+                canonical.image_count,
+                canonical.annotation_count,
             )
             return PipelineStageResult(
                 stage="conversion",
@@ -345,7 +377,9 @@ class DatasetWorkflow(WorkflowInterface):
             )
 
     async def _run_quality_stage(
-        self, context: DatasetContext, dry_run: bool,
+        self,
+        context: DatasetContext,
+        dry_run: bool,
     ) -> PipelineStageResult:
         logger.info("Running quality checks...")
         stage_start = time.monotonic()
@@ -374,7 +408,7 @@ class DatasetWorkflow(WorkflowInterface):
             passed = report.overall_score.production_ready
 
             grade = report.overall_score.letter_grade
-            if hasattr(grade, 'value'):
+            if hasattr(grade, "value"):
                 grade_str = grade.value
             else:
                 grade_str = str(grade)
@@ -407,7 +441,9 @@ class DatasetWorkflow(WorkflowInterface):
             )
 
     async def _run_training_stage(
-        self, context: DatasetContext, dry_run: bool,
+        self,
+        context: DatasetContext,
+        dry_run: bool,
     ) -> PipelineStageResult:
         logger.info("Starting training...")
         stage_start = time.monotonic()
@@ -429,14 +465,17 @@ class DatasetWorkflow(WorkflowInterface):
             )
 
             result: TrainingResult = await asyncio.to_thread(
-                self._training.run_pipeline, config,
+                self._training.run_pipeline,
+                config,
             )
 
             context.training_result = result
 
             logger.info(
                 "Training complete: experiment=%s, model=%s, status=%s",
-                result.experiment_id, result.model_id, result.status,
+                result.experiment_id,
+                result.model_id,
+                result.status,
             )
             return PipelineStageResult(
                 stage="training",
