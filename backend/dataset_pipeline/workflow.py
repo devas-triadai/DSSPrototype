@@ -13,6 +13,7 @@ import logging
 import time
 from pathlib import Path
 
+from backend.dataset_catalog.exceptions import CatalogError
 from backend.dataset_catalog.models import CatalogEntry
 from backend.dataset_catalog.service import DatasetCatalogService
 from backend.dataset_conversion.models import CanonicalDataset, LoadResult
@@ -68,6 +69,7 @@ class DatasetWorkflow(WorkflowInterface):
         skip_training: bool = False,
         continue_on_error: bool = False,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         """Execute the full pipeline against the given context."""
         stages: list[PipelineStageResult] = []
@@ -76,7 +78,7 @@ class DatasetWorkflow(WorkflowInterface):
         start_time = time.monotonic()
 
         try:
-            s1 = await self._run_catalog_stage(context, dry_run)
+            s1 = await self._run_catalog_stage(context, dry_run, force=force)
             stages.append(s1)
             if self._should_stop(s1.status, continue_on_error):
                 overall_status = s1.status
@@ -152,7 +154,7 @@ class DatasetWorkflow(WorkflowInterface):
     # ------------------------------------------------------------------
 
     async def _run_catalog_stage(
-        self, context: DatasetContext, dry_run: bool,
+        self, context: DatasetContext, dry_run: bool, force: bool = False,
     ) -> PipelineStageResult:
         logger.info("Registering dataset in catalog...")
         stage_start = time.monotonic()
@@ -181,6 +183,34 @@ class DatasetWorkflow(WorkflowInterface):
                 stage="catalog",
                 status=PipelineStatus.COMPLETED,
                 result={"entry_id": entry.entry_id, "dataset_name": entry.name},
+                duration_seconds=time.monotonic() - stage_start,
+            )
+        except CatalogError as exc:
+            err_msg = str(exc)
+            entry_id = err_msg
+            prefix = "Entry already exists: "
+            if prefix in err_msg:
+                entry_id = err_msg.split(prefix, 1)[1].strip()
+
+            if force:
+                logger.info("Force mode — catalog entry already exists, reusing: %s", entry_id)
+            else:
+                logger.warning("Catalog entry already exists, reusing: %s", entry_id)
+
+            context.catalog_entry_id = entry_id
+            context.metadata["catalog_entry"] = {
+                "entry_id": entry_id,
+                "name": context.dataset_name,
+                "source_id": pipeline_config.catalog_source_id,
+                "source_type": pipeline_config.catalog_source_type,
+            }
+            context.metadata["catalog_source_type"] = pipeline_config.catalog_source_type
+            context.metadata["catalog_entry_reused"] = True
+
+            return PipelineStageResult(
+                stage="catalog",
+                status=PipelineStatus.COMPLETED,
+                result={"entry_id": entry_id, "dataset_name": context.dataset_name, "reused": True},
                 duration_seconds=time.monotonic() - stage_start,
             )
         except Exception as exc:

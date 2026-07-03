@@ -72,6 +72,7 @@ def cmd_ingest(
         False, "--continue-on-error", help="Continue on stage failure",
     ),
     dry_run: bool = typer.Option(False, "--dry-run", help="Validate without executing"),
+    force: bool = typer.Option(False, "--force", help="Force re-create catalog entry"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose logging"),
     config_path: Optional[str] = typer.Option(
         None, "--config", "-c", help="Config file path (not yet implemented)",
@@ -92,6 +93,7 @@ def cmd_ingest(
             skip_training=skip_training,
             continue_on_error=continue_on_error,
             dry_run=dry_run,
+            force=force,
             output_dir=Path(output) if output else None,
         ),
     )
@@ -104,13 +106,16 @@ def cmd_catalog(
     dataset: str = typer.Option(..., "--dataset", "-d", help="Dataset name"),
     source: str = typer.Option(..., "--source", "-s", help="Path to raw dataset"),
     dry_run: bool = typer.Option(False, "--dry-run", help="Validate without executing"),
+    force: bool = typer.Option(False, "--force", help="Force re-create catalog entry"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose logging"),
 ) -> None:
     """Register a dataset in the catalog."""
     _setup_logging(verbose)
     service = _build_service()
     result = asyncio.run(
-        service.run_catalog(dataset_name=dataset, source_path=Path(source), dry_run=dry_run),
+        service.run_catalog(
+            dataset_name=dataset, source_path=Path(source), dry_run=dry_run, force=force,
+        ),
     )
     _print_result(result)
 
@@ -187,6 +192,7 @@ def cmd_pipeline(
         False, "--continue-on-error", help="Continue on stage failure",
     ),
     dry_run: bool = typer.Option(False, "--dry-run", help="Validate without executing"),
+    force: bool = typer.Option(False, "--force", help="Force re-create catalog entry"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose logging"),
     config_path: Optional[str] = typer.Option(
         None, "--config", "-c", help="Config file path (not yet implemented)",
@@ -205,6 +211,7 @@ def cmd_pipeline(
             skip_training=skip_training,
             continue_on_error=continue_on_error,
             dry_run=dry_run,
+            force=force,
             output_dir=Path(output) if output else None,
         ),
     )

@@ -85,11 +85,12 @@ class DatasetIngestor(DatasetIngestorInterface):
         continue_on_error: bool = False,
         dry_run: bool = False,
         output_dir: Path | None = None,
+        force: bool = False,
     ) -> PipelineResult:
         """Ingest a dataset through the entire pipeline."""
         logger.info(
-            "Ingestion started | dataset=%s | source=%s | dry_run=%s",
-            dataset_name, source_path, dry_run,
+            "Ingestion started | dataset=%s | source=%s | dry_run=%s | force=%s",
+            dataset_name, source_path, dry_run, force,
         )
 
         source_path = source_path.resolve()
@@ -112,6 +113,7 @@ class DatasetIngestor(DatasetIngestorInterface):
             skip_training=skip_training,
             continue_on_error=continue_on_error,
             dry_run=dry_run,
+            force=force,
         )
 
         if result.status == PipelineStatus.COMPLETED:

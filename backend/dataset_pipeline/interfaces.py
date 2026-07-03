@@ -19,6 +19,7 @@ class WorkflowInterface(ABC):
         skip_training: bool = False,
         continue_on_error: bool = False,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         ...
 
@@ -37,6 +38,7 @@ class PipelineServiceInterface(ABC):
         continue_on_error: bool = False,
         dry_run: bool = False,
         output_dir: Path | None = None,
+        force: bool = False,
     ) -> PipelineResult:
         ...
 
@@ -47,6 +49,7 @@ class PipelineServiceInterface(ABC):
         source_path: Path,
         *,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         ...
 
@@ -56,6 +59,7 @@ class PipelineServiceInterface(ABC):
         dataset_name: str,
         *,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         ...
 
@@ -66,6 +70,7 @@ class PipelineServiceInterface(ABC):
         source_path: Path,
         *,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         ...
 
@@ -75,6 +80,7 @@ class PipelineServiceInterface(ABC):
         dataset_name: str,
         *,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         ...
 
@@ -84,6 +90,7 @@ class PipelineServiceInterface(ABC):
         dataset_name: str,
         *,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         ...
 
@@ -98,6 +105,7 @@ class PipelineServiceInterface(ABC):
         continue_on_error: bool = False,
         dry_run: bool = False,
         output_dir: Path | None = None,
+        force: bool = False,
     ) -> PipelineResult:
         ...
 
@@ -116,6 +124,7 @@ class DatasetIngestorInterface(ABC):
         continue_on_error: bool = False,
         dry_run: bool = False,
         output_dir: Path | None = None,
+        force: bool = False,
     ) -> PipelineResult:
         ...
 

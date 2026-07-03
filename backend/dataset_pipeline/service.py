@@ -77,6 +77,7 @@ class PipelineService(PipelineServiceInterface):
         continue_on_error: bool = False,
         dry_run: bool = False,
         output_dir: Path | None = None,
+        force: bool = False,
     ) -> PipelineResult:
         """Ingest a dataset through the entire pipeline."""
         return await self._ingestor.ingest(
@@ -87,6 +88,7 @@ class PipelineService(PipelineServiceInterface):
             continue_on_error=continue_on_error,
             dry_run=dry_run,
             output_dir=output_dir,
+            force=force,
         )
 
     async def run_catalog(
@@ -95,13 +97,14 @@ class PipelineService(PipelineServiceInterface):
         source_path: Path,
         *,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         wf = cast(DatasetWorkflow, self._workflow)
         context = DatasetContext(
             dataset_name=dataset_name,
             source_path=source_path.resolve(),
         )
-        stage = await wf._run_catalog_stage(context, dry_run)
+        stage = await wf._run_catalog_stage(context, dry_run, force=force)
         return _single_stage_result(dataset_name, stage, context)
 
     async def run_mapping(
@@ -109,6 +112,7 @@ class PipelineService(PipelineServiceInterface):
         dataset_name: str,
         *,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         wf = cast(DatasetWorkflow, self._workflow)
         context = DatasetContext(
@@ -124,6 +128,7 @@ class PipelineService(PipelineServiceInterface):
         source_path: Path,
         *,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         wf = cast(DatasetWorkflow, self._workflow)
         context = DatasetContext(
@@ -138,6 +143,7 @@ class PipelineService(PipelineServiceInterface):
         dataset_name: str,
         *,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         wf = cast(DatasetWorkflow, self._workflow)
         context = DatasetContext(
@@ -152,6 +158,7 @@ class PipelineService(PipelineServiceInterface):
         dataset_name: str,
         *,
         dry_run: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         wf = cast(DatasetWorkflow, self._workflow)
         context = DatasetContext(
@@ -171,6 +178,7 @@ class PipelineService(PipelineServiceInterface):
         continue_on_error: bool = False,
         dry_run: bool = False,
         output_dir: Path | None = None,
+        force: bool = False,
     ) -> PipelineResult:
         return await self.ingest_dataset(
             dataset_name=dataset_name,
@@ -180,4 +188,5 @@ class PipelineService(PipelineServiceInterface):
             continue_on_error=continue_on_error,
             dry_run=dry_run,
             output_dir=output_dir,
+            force=force,
         )
