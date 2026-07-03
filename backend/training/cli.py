@@ -15,6 +15,7 @@ from pathlib import Path
 
 from backend.training.backends.yolo_backend import YOLOTrainingBackend
 from backend.training.checkpoint import CheckpointManager
+from backend.training.dataset_exporter import SUPPORTED_DATASET_TYPES, TrainingDatasetExporter
 from backend.training.exceptions import DatasetNotReadyError, PreValidationError
 from backend.training.experiment import ExperimentManager
 from backend.training.exporter import ExportPipeline
@@ -48,6 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
     sub.required = True
 
     _add_train_parser(sub)
+    _add_export_parser(sub)
     return parser
 
 
@@ -240,6 +242,72 @@ def _build_config(args: argparse.Namespace) -> TrainingConfigData:
 
 
 # ------------------------------------------------------------------
+# Export subcommand
+# ------------------------------------------------------------------
+
+
+def _add_export_parser(sub: argparse._SubParsersAction[argparse.ArgumentParser]) -> None:
+    p = sub.add_parser("export", help="Export a raw dataset to YOLO-ready format")
+
+    supported = ", ".join(sorted(SUPPORTED_DATASET_TYPES))
+    p.add_argument(
+        "--dataset",
+        required=True,
+        help=f"Dataset type ({supported})",
+    )
+    p.add_argument(
+        "--source",
+        required=True,
+        type=Path,
+        help="Path to the raw dataset directory",
+    )
+    p.add_argument(
+        "--name",
+        default=None,
+        help="Export directory name (default: source directory basename)",
+    )
+    p.add_argument(
+        "--output-base",
+        type=Path,
+        default=Path("datasets") / "exports" / "yolo",
+        help="Base output directory (default: datasets/exports/yolo)",
+    )
+
+
+def cmd_export(args: argparse.Namespace) -> None:
+    exporter = TrainingDatasetExporter(output_base=args.output_base)
+    source = args.source.resolve()
+
+    LOG.info("Exporting dataset '%s' from %s ...", args.dataset, source)
+
+    result = exporter.export(
+        dataset_type=args.dataset,
+        source_path=source,
+        dataset_name=args.name,
+    )
+
+    if result["status"] == "failed":
+        LOG.error("Export failed:")
+        for err in result["errors"]:
+            LOG.error("  - %s", err)
+        sys.exit(1)
+
+    print(f"\n{'=' * 60}")
+    print("  Dataset export completed")
+    print(f"  Name       : {result['dataset_name']}")
+    print(f"  Type       : {result['dataset_type']}")
+    print(f"  Classes    : {len(result['class_names'])}")
+    print(f"  Train      : {result['train_count']} images")
+    print(f"  Val        : {result['val_count']} images")
+    print(f"  Annotations: {result['annotation_count']}")
+    print(f"  Output     : {result['output_dir']}")
+    print(f"  Data YAML  : {result['data_yaml']}")
+    print(f"{'=' * 60}\n")
+
+    LOG.info("Export completed: %s", result["output_dir"])
+
+
+# ------------------------------------------------------------------
 # Service factory
 # ------------------------------------------------------------------
 
@@ -371,6 +439,8 @@ def main(argv: list[str] | None = None) -> None:
     if args.command == "train":
         validate_args(args)
         cmd_train(args)
+    elif args.command == "export":
+        cmd_export(args)
 
 
 if __name__ == "__main__":
