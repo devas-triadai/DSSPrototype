@@ -1,0 +1,5 @@
+path: .
+train: train
+val: val
+nc: 80
+names: ['person']

@@ -1,0 +1,40 @@
+{
+  "experiment_id": "exp_3c5f51d3a685",
+  "experiment_name": "utest",
+  "dataset_version": "utest",
+  "config": {
+    "model_name": "yolo11n.pt",
+    "model_version": "1.0.0",
+    "dataset_version": "utest",
+    "experiment_name": "utest",
+    "batch_size": 16,
+    "epochs": 100,
+    "learning_rate": 0.001,
+    "optimizer": "adam",
+    "scheduler": "cosine",
+    "weight_decay": 0.0001,
+    "image_size": [
+      640,
+      640
+    ],
+    "augmentation": "default",
+    "mixed_precision": false,
+    "device": "cpu",
+    "workers": 4,
+    "seed": 42,
+    "resume_checkpoint": null,
+    "early_stopping_patience": null,
+    "early_stopping_delta": 0.001,
+    "validation_interval": 1,
+    "save_interval": 5,
+    "notes": ""
+  },
+  "training_start": "2026-07-03T19:20:04.765056+00:00",
+  "training_end": "2026-07-03T19:20:21.737743+00:00",
+  "duration_seconds": 5.418013500000598,
+  "best_epoch": null,
+  "best_metric": null,
+  "best_metric_name": "",
+  "status": "failed",
+  "notes": ""
+}

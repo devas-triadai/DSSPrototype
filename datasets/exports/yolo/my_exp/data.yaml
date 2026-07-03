@@ -1,0 +1,5 @@
+path: /data/coco
+train: train2017
+val: val2017
+nc: 80
+names: ['person']
