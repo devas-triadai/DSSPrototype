@@ -1,0 +1,78 @@
+{
+  "version": "1.0.0",
+  "schema_version": "1.0",
+  "domain": "drones",
+  "description": "Unmanned aerial systems ontology for reconnaissance and tactical platforms",
+  "entries": [
+    {
+      "canonical_name": "drone",
+      "aliases": ["uav", "unmanned_aerial_vehicle", "unpiloted_aircraft", "remotely_piloted_vehicle", "rpv", "uas"],
+      "parent_category": "unmanned_system",
+      "child_categories": ["surveillance_drone", "combat_drone", "reconnaissance_drone", "tactical_drone"],
+      "civilian_equivalents": ["commercial_drone", "hobby_drone", "photography_drone", "survey_drone"],
+      "military_equivalents": ["tactical_uav", "surveillance_platform", "reconnaissance_uas"],
+      "description": "An unmanned aircraft operated remotely or autonomously",
+      "confidence_base": 0.90
+    },
+    {
+      "canonical_name": "surveillance_drone",
+      "aliases": ["spy_drone", "reconnaissance_drone", "observation_drone", "intelligence_drone"],
+      "parent_category": "drone",
+      "child_categories": ["fixed_wing_surveillance", "rotary_surveillance", "loitering_munition"],
+      "civilian_equivalents": ["survey_drone", "mapping_drone", "inspection_drone"],
+      "military_equivalents": ["tactical_uav", "reconnaissance_platform", "isr_platform"],
+      "description": "A drone designed for intelligence, surveillance, and reconnaissance missions",
+      "confidence_base": 0.82
+    },
+    {
+      "canonical_name": "combat_drone",
+      "aliases": ["attack_drone", "armed_drone", "strike_drone", "weaponized_uav"],
+      "parent_category": "drone",
+      "child_categories": ["ucav", "loitering_munition", "swarm_drone"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["unmanned_combat_air_vehicle", "strike_platform", "tactical_drone"],
+      "description": "A drone equipped with weapons for offensive operations",
+      "confidence_base": 0.80
+    },
+    {
+      "canonical_name": "ucav",
+      "aliases": ["unmanned_combat_air_vehicle", "combat_uav", "attack_uav", "drone_fighter"],
+      "parent_category": "combat_drone",
+      "child_categories": ["heavy_ucav", "medium_ucav", "light_ucav"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["combat_drone", "strike_platform", "tactical_uav"],
+      "description": "An unmanned combat air vehicle capable of autonomous or remote strike missions",
+      "confidence_base": 0.78
+    },
+    {
+      "canonical_name": "loitering_munition",
+      "aliases": ["kamikaze_drone", "suicide_drone", "harpy", "loitering_weapon"],
+      "parent_category": "combat_drone",
+      "child_categories": ["tactical_loitering", "strategic_loitering"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["strike_drone", "autonomous_weapon", "precision_munition"],
+      "description": "A drone designed to loiter over an area and strike targets on demand",
+      "confidence_base": 0.75
+    },
+    {
+      "canonical_name": "quadcopter",
+      "aliases": ["quadrotor", "multirotor", "four_rotor_drone", "x4_drone"],
+      "parent_category": "drone",
+      "child_categories": ["consumer_quadcopter", "professional_quadcopter", "tactical_quadcopter"],
+      "civilian_equivalents": ["hobby_drone", "camera_drone", "racing_drone"],
+      "military_equivalents": ["tactical_uav", "short_range_reconnaissance", "urban_surveillance"],
+      "description": "A drone with four rotors, common for civilian and tactical short-range use",
+      "confidence_base": 0.85
+    },
+    {
+      "canonical_name": "unmanned_system",
+      "aliases": ["autonomous_system", "robotic_system", "unpiloted_system"],
+      "parent_category": "vehicle",
+      "child_categories": ["drone", "unmanned_ground_vehicle", "unmanned_surface_vehicle"],
+      "civilian_equivalents": ["autonomous_robot", "remote_controlled_vehicle"],
+      "military_equivalents": ["autonomous_platform", "robotic_asset", "unmanned_platform"],
+      "description": "Any vehicle or system that operates without an onboard human operator",
+      "confidence_base": 0.55
+    }
+  ]
+}

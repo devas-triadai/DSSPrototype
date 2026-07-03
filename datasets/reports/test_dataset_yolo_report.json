@@ -1,0 +1,667 @@
+{
+  "dataset_id": "test_dataset_yolo",
+  "dataset_name": "test_dataset",
+  "version": "1.0.0",
+  "images": [
+    {
+      "image_id": "img000",
+      "image_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img000.jpg",
+      "image_name": "img000.jpg",
+      "width": 640,
+      "height": 480,
+      "channels": 3,
+      "format": "jpg",
+      "annotations": [
+        {
+          "class_name": "tank",
+          "normalized_class": "tank",
+          "ontology_class": "main_battle_tank",
+          "bbox": [
+            0.35,
+            0.3,
+            0.65,
+            0.7
+          ],
+          "bbox_format": "xyxy_normalized",
+          "confidence": null,
+          "segmentation": null,
+          "attributes": {}
+        }
+      ],
+      "checksum": "91d4f46803bd53c60013a0af6058f0318d142443ba1fcf8c3f0f89ddd8571762",
+      "metadata": {},
+      "provenance": {
+        "source_dataset": "tmpw_7stu3e",
+        "original_class": "",
+        "normalized_class": "tank",
+        "ontology_class": "main_battle_tank",
+        "import_timestamp": "2026-07-02T22:10:41.769836+00:00",
+        "license": "",
+        "dataset_version": "",
+        "checksum": "",
+        "original_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img000.jpg",
+        "import_format": "yolo"
+      }
+    },
+    {
+      "image_id": "img001",
+      "image_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img001.jpg",
+      "image_name": "img001.jpg",
+      "width": 641,
+      "height": 481,
+      "channels": 3,
+      "format": "jpg",
+      "annotations": [
+        {
+          "class_name": "truck",
+          "normalized_class": "truck",
+          "ontology_class": "truck",
+          "bbox": [
+            0.35,
+            0.3,
+            0.65,
+            0.7
+          ],
+          "bbox_format": "xyxy_normalized",
+          "confidence": null,
+          "segmentation": null,
+          "attributes": {}
+        }
+      ],
+      "checksum": "977cef0516962daca2e78860aeaf17849fa1fa8694375a6209ce7c8a16f0869c",
+      "metadata": {},
+      "provenance": {
+        "source_dataset": "tmpw_7stu3e",
+        "original_class": "",
+        "normalized_class": "truck",
+        "ontology_class": "truck",
+        "import_timestamp": "2026-07-02T22:10:41.770382+00:00",
+        "license": "",
+        "dataset_version": "",
+        "checksum": "",
+        "original_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img001.jpg",
+        "import_format": "yolo"
+      }
+    },
+    {
+      "image_id": "img002",
+      "image_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img002.jpg",
+      "image_name": "img002.jpg",
+      "width": 642,
+      "height": 482,
+      "channels": 3,
+      "format": "jpg",
+      "annotations": [
+        {
+          "class_name": "tank",
+          "normalized_class": "tank",
+          "ontology_class": "main_battle_tank",
+          "bbox": [
+            0.35,
+            0.3,
+            0.65,
+            0.7
+          ],
+          "bbox_format": "xyxy_normalized",
+          "confidence": null,
+          "segmentation": null,
+          "attributes": {}
+        }
+      ],
+      "checksum": "d3b412a25e5abf6718af9cc5a04ee472d281150780110b5a4c66e66514ef927c",
+      "metadata": {},
+      "provenance": {
+        "source_dataset": "tmpw_7stu3e",
+        "original_class": "",
+        "normalized_class": "tank",
+        "ontology_class": "main_battle_tank",
+        "import_timestamp": "2026-07-02T22:10:41.770886+00:00",
+        "license": "",
+        "dataset_version": "",
+        "checksum": "",
+        "original_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img002.jpg",
+        "import_format": "yolo"
+      }
+    },
+    {
+      "image_id": "img003",
+      "image_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img003.jpg",
+      "image_name": "img003.jpg",
+      "width": 643,
+      "height": 483,
+      "channels": 3,
+      "format": "jpg",
+      "annotations": [
+        {
+          "class_name": "truck",
+          "normalized_class": "truck",
+          "ontology_class": "truck",
+          "bbox": [
+            0.35,
+            0.3,
+            0.65,
+            0.7
+          ],
+          "bbox_format": "xyxy_normalized",
+          "confidence": null,
+          "segmentation": null,
+          "attributes": {}
+        }
+      ],
+      "checksum": "048bc2e902ccfbca5f400cb2aef2b5d1e51b048ac752b8a184e75a52d05a22ab",
+      "metadata": {},
+      "provenance": {
+        "source_dataset": "tmpw_7stu3e",
+        "original_class": "",
+        "normalized_class": "truck",
+        "ontology_class": "truck",
+        "import_timestamp": "2026-07-02T22:10:41.771992+00:00",
+        "license": "",
+        "dataset_version": "",
+        "checksum": "",
+        "original_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img003.jpg",
+        "import_format": "yolo"
+      }
+    },
+    {
+      "image_id": "img004",
+      "image_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img004.jpg",
+      "image_name": "img004.jpg",
+      "width": 644,
+      "height": 484,
+      "channels": 3,
+      "format": "jpg",
+      "annotations": [
+        {
+          "class_name": "tank",
+          "normalized_class": "tank",
+          "ontology_class": "main_battle_tank",
+          "bbox": [
+            0.35,
+            0.3,
+            0.65,
+            0.7
+          ],
+          "bbox_format": "xyxy_normalized",
+          "confidence": null,
+          "segmentation": null,
+          "attributes": {}
+        }
+      ],
+      "checksum": "7d829be595b6f968b67fa93a05c90d7882cbe65cbc643f3331671e11aff7b4b1",
+      "metadata": {},
+      "provenance": {
+        "source_dataset": "tmpw_7stu3e",
+        "original_class": "",
+        "normalized_class": "tank",
+        "ontology_class": "main_battle_tank",
+        "import_timestamp": "2026-07-02T22:10:41.772553+00:00",
+        "license": "",
+        "dataset_version": "",
+        "checksum": "",
+        "original_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img004.jpg",
+        "import_format": "yolo"
+      }
+    },
+    {
+      "image_id": "img005",
+      "image_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img005.jpg",
+      "image_name": "img005.jpg",
+      "width": 645,
+      "height": 485,
+      "channels": 3,
+      "format": "jpg",
+      "annotations": [
+        {
+          "class_name": "truck",
+          "normalized_class": "truck",
+          "ontology_class": "truck",
+          "bbox": [
+            0.35,
+            0.3,
+            0.65,
+            0.7
+          ],
+          "bbox_format": "xyxy_normalized",
+          "confidence": null,
+          "segmentation": null,
+          "attributes": {}
+        }
+      ],
+      "checksum": "07be714486c5f079f3dbf8a1e6995469d0cb1831d7200e991b14e90491e1c483",
+      "metadata": {},
+      "provenance": {
+        "source_dataset": "tmpw_7stu3e",
+        "original_class": "",
+        "normalized_class": "truck",
+        "ontology_class": "truck",
+        "import_timestamp": "2026-07-02T22:10:41.773053+00:00",
+        "license": "",
+        "dataset_version": "",
+        "checksum": "",
+        "original_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img005.jpg",
+        "import_format": "yolo"
+      }
+    },
+    {
+      "image_id": "img006",
+      "image_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img006.jpg",
+      "image_name": "img006.jpg",
+      "width": 646,
+      "height": 486,
+      "channels": 3,
+      "format": "jpg",
+      "annotations": [
+        {
+          "class_name": "tank",
+          "normalized_class": "tank",
+          "ontology_class": "main_battle_tank",
+          "bbox": [
+            0.35,
+            0.3,
+            0.65,
+            0.7
+          ],
+          "bbox_format": "xyxy_normalized",
+          "confidence": null,
+          "segmentation": null,
+          "attributes": {}
+        }
+      ],
+      "checksum": "5e91e260c493e9164731f00fbc30a2c9dfc1c7c50b0846b3292fde63e13cd16d",
+      "metadata": {},
+      "provenance": {
+        "source_dataset": "tmpw_7stu3e",
+        "original_class": "",
+        "normalized_class": "tank",
+        "ontology_class": "main_battle_tank",
+        "import_timestamp": "2026-07-02T22:10:41.773578+00:00",
+        "license": "",
+        "dataset_version": "",
+        "checksum": "",
+        "original_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img006.jpg",
+        "import_format": "yolo"
+      }
+    },
+    {
+      "image_id": "img007",
+      "image_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img007.jpg",
+      "image_name": "img007.jpg",
+      "width": 647,
+      "height": 487,
+      "channels": 3,
+      "format": "jpg",
+      "annotations": [
+        {
+          "class_name": "truck",
+          "normalized_class": "truck",
+          "ontology_class": "truck",
+          "bbox": [
+            0.35,
+            0.3,
+            0.65,
+            0.7
+          ],
+          "bbox_format": "xyxy_normalized",
+          "confidence": null,
+          "segmentation": null,
+          "attributes": {}
+        }
+      ],
+      "checksum": "0692a7282cc506c635b10633211cbc3434d25d1deb99e11890ceca18d0500ad2",
+      "metadata": {},
+      "provenance": {
+        "source_dataset": "tmpw_7stu3e",
+        "original_class": "",
+        "normalized_class": "truck",
+        "ontology_class": "truck",
+        "import_timestamp": "2026-07-02T22:10:41.774055+00:00",
+        "license": "",
+        "dataset_version": "",
+        "checksum": "",
+        "original_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img007.jpg",
+        "import_format": "yolo"
+      }
+    },
+    {
+      "image_id": "img008",
+      "image_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img008.jpg",
+      "image_name": "img008.jpg",
+      "width": 648,
+      "height": 488,
+      "channels": 3,
+      "format": "jpg",
+      "annotations": [
+        {
+          "class_name": "tank",
+          "normalized_class": "tank",
+          "ontology_class": "main_battle_tank",
+          "bbox": [
+            0.35,
+            0.3,
+            0.65,
+            0.7
+          ],
+          "bbox_format": "xyxy_normalized",
+          "confidence": null,
+          "segmentation": null,
+          "attributes": {}
+        }
+      ],
+      "checksum": "a79bc50abbd9cb4b7cf586f0350c9fb3cf7d03ac837552e16f9c82a843154a71",
+      "metadata": {},
+      "provenance": {
+        "source_dataset": "tmpw_7stu3e",
+        "original_class": "",
+        "normalized_class": "tank",
+        "ontology_class": "main_battle_tank",
+        "import_timestamp": "2026-07-02T22:10:41.774522+00:00",
+        "license": "",
+        "dataset_version": "",
+        "checksum": "",
+        "original_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img008.jpg",
+        "import_format": "yolo"
+      }
+    },
+    {
+      "image_id": "img009",
+      "image_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img009.jpg",
+      "image_name": "img009.jpg",
+      "width": 649,
+      "height": 489,
+      "channels": 3,
+      "format": "jpg",
+      "annotations": [
+        {
+          "class_name": "truck",
+          "normalized_class": "truck",
+          "ontology_class": "truck",
+          "bbox": [
+            0.35,
+            0.3,
+            0.65,
+            0.7
+          ],
+          "bbox_format": "xyxy_normalized",
+          "confidence": null,
+          "segmentation": null,
+          "attributes": {}
+        }
+      ],
+      "checksum": "a84f4dcf658b458876a48561cbf59cb1fddfc7215cdc93b090328b46fc656f73",
+      "metadata": {},
+      "provenance": {
+        "source_dataset": "tmpw_7stu3e",
+        "original_class": "",
+        "normalized_class": "truck",
+        "ontology_class": "truck",
+        "import_timestamp": "2026-07-02T22:10:41.775002+00:00",
+        "license": "",
+        "dataset_version": "",
+        "checksum": "",
+        "original_path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\tmpw_7stu3e\\images\\img009.jpg",
+        "import_format": "yolo"
+      }
+    }
+  ],
+  "classes": [
+    "main_battle_tank",
+    "truck"
+  ],
+  "class_mapping": {
+    "main_battle_tank": 0,
+    "truck": 1
+  },
+  "splits": {
+    "train": [
+      "img007",
+      "img002",
+      "img004",
+      "img006",
+      "img005",
+      "img001"
+    ],
+    "validation": [
+      "img009",
+      "img008"
+    ],
+    "test": [
+      "img003",
+      "img000"
+    ]
+  },
+  "statistics": {
+    "dataset_id": "test_dataset_yolo",
+    "total_images": 10,
+    "total_annotations": 10,
+    "classes": [
+      "main_battle_tank",
+      "truck"
+    ],
+    "class_count": 2,
+    "objects_per_class": {
+      "main_battle_tank": 5,
+      "truck": 5
+    },
+    "class_distribution": {
+      "main_battle_tank": 0.5,
+      "truck": 0.5
+    },
+    "class_imbalance_ratio": 1.0,
+    "average_objects_per_image": 1.0,
+    "average_image_width": 644.5,
+    "average_image_height": 484.5,
+    "resolution_distribution": {
+      "640x480": 1,
+      "641x481": 1,
+      "642x482": 1,
+      "643x483": 1,
+      "644x484": 1,
+      "645x485": 1,
+      "646x486": 1,
+      "647x487": 1,
+      "648x488": 1,
+      "649x489": 1
+    },
+    "bbox_width_distribution": {
+      "0.30": 10
+    },
+    "bbox_height_distribution": {
+      "0.40": 10
+    },
+    "aspect_ratio_distribution": {
+      "0.75": 10
+    },
+    "ontology_coverage": 1.0,
+    "duplicate_ratio": 0.0,
+    "dataset_diversity": 1.0,
+    "generated_at": "2026-07-02T22:10:41.793784+00:00"
+  },
+  "quality": {
+    "dataset_id": "test_dataset_yolo",
+    "quality_score": 0.7981818181818181,
+    "duplicate_ratio": 0.9,
+    "class_imbalance_ratio": 1.0,
+    "missing_annotations": 0,
+    "missing_images": 0,
+    "annotation_consistency": 1.0,
+    "ontology_coverage": 1.0,
+    "warnings": [],
+    "errors": [],
+    "passed": true,
+    "assessed_at": "2026-07-02T22:10:41.793958+00:00"
+  },
+  "validation": {
+    "dataset_id": "test_dataset_yolo",
+    "passed": true,
+    "missing_images": [],
+    "missing_annotations": [],
+    "empty_annotations": [],
+    "corrupted_files": [],
+    "unsupported_extensions": [],
+    "invalid_bounding_boxes": [],
+    "negative_coordinates": [],
+    "class_mismatches": [],
+    "orphan_labels": [],
+    "total_checks": 52,
+    "passed_checks": 52,
+    "failed_checks": 0,
+    "warnings": [],
+    "errors": [],
+    "validated_at": "2026-07-02T22:10:41.775614+00:00"
+  },
+  "duplicates": {
+    "dataset_id": "test_dataset_yolo",
+    "duplicates": [
+      {
+        "duplicate_type": "metadata",
+        "original_id": "img000",
+        "duplicate_id": "img001",
+        "similarity_score": 1.0,
+        "reason": "Identical metadata"
+      },
+      {
+        "duplicate_type": "metadata",
+        "original_id": "img000",
+        "duplicate_id": "img002",
+        "similarity_score": 1.0,
+        "reason": "Identical metadata"
+      },
+      {
+        "duplicate_type": "metadata",
+        "original_id": "img000",
+        "duplicate_id": "img003",
+        "similarity_score": 1.0,
+        "reason": "Identical metadata"
+      },
+      {
+        "duplicate_type": "metadata",
+        "original_id": "img000",
+        "duplicate_id": "img004",
+        "similarity_score": 1.0,
+        "reason": "Identical metadata"
+      },
+      {
+        "duplicate_type": "metadata",
+        "original_id": "img000",
+        "duplicate_id": "img005",
+        "similarity_score": 1.0,
+        "reason": "Identical metadata"
+      },
+      {
+        "duplicate_type": "metadata",
+        "original_id": "img000",
+        "duplicate_id": "img006",
+        "similarity_score": 1.0,
+        "reason": "Identical metadata"
+      },
+      {
+        "duplicate_type": "metadata",
+        "original_id": "img000",
+        "duplicate_id": "img007",
+        "similarity_score": 1.0,
+        "reason": "Identical metadata"
+      },
+      {
+        "duplicate_type": "metadata",
+        "original_id": "img000",
+        "duplicate_id": "img008",
+        "similarity_score": 1.0,
+        "reason": "Identical metadata"
+      },
+      {
+        "duplicate_type": "metadata",
+        "original_id": "img000",
+        "duplicate_id": "img009",
+        "similarity_score": 1.0,
+        "reason": "Identical metadata"
+      },
+      {
+        "duplicate_type": "object",
+        "original_id": "img000",
+        "duplicate_id": "img002",
+        "similarity_score": 1.0,
+        "reason": "Duplicate object across images: tank:(0.35, 0.3, 0.65, 0.7)"
+      },
+      {
+        "duplicate_type": "object",
+        "original_id": "img000",
+        "duplicate_id": "img004",
+        "similarity_score": 1.0,
+        "reason": "Duplicate object across images: tank:(0.35, 0.3, 0.65, 0.7)"
+      },
+      {
+        "duplicate_type": "object",
+        "original_id": "img000",
+        "duplicate_id": "img006",
+        "similarity_score": 1.0,
+        "reason": "Duplicate object across images: tank:(0.35, 0.3, 0.65, 0.7)"
+      },
+      {
+        "duplicate_type": "object",
+        "original_id": "img000",
+        "duplicate_id": "img008",
+        "similarity_score": 1.0,
+        "reason": "Duplicate object across images: tank:(0.35, 0.3, 0.65, 0.7)"
+      },
+      {
+        "duplicate_type": "object",
+        "original_id": "img001",
+        "duplicate_id": "img003",
+        "similarity_score": 1.0,
+        "reason": "Duplicate object across images: truck:(0.35, 0.3, 0.65, 0.7)"
+      },
+      {
+        "duplicate_type": "object",
+        "original_id": "img001",
+        "duplicate_id": "img005",
+        "similarity_score": 1.0,
+        "reason": "Duplicate object across images: truck:(0.35, 0.3, 0.65, 0.7)"
+      },
+      {
+        "duplicate_type": "object",
+        "original_id": "img001",
+        "duplicate_id": "img007",
+        "similarity_score": 1.0,
+        "reason": "Duplicate object across images: truck:(0.35, 0.3, 0.65, 0.7)"
+      },
+      {
+        "duplicate_type": "object",
+        "original_id": "img001",
+        "duplicate_id": "img009",
+        "similarity_score": 1.0,
+        "reason": "Duplicate object across images: truck:(0.35, 0.3, 0.65, 0.7)"
+      }
+    ],
+    "duplicate_image_count": 9,
+    "duplicate_annotation_count": 8,
+    "duplicate_ratio": 0.9,
+    "detected_at": "2026-07-02T22:10:41.793329+00:00"
+  },
+  "ontology_mapping": {
+    "dataset_id": "test_dataset_yolo",
+    "mappings": {
+      "tank": "main_battle_tank",
+      "truck": "truck"
+    },
+    "unmapped_classes": [],
+    "ontology_coverage": 1.0,
+    "ontology_version": "vehicles:1.0.0|aircraft:1.0.0|drones:1.0.0|weapons:1.0.0|terrain:1.0.0",
+    "mapped_at": "2026-07-02T22:10:41.792879+00:00"
+  },
+  "export_result": {
+    "dataset_id": "test_dataset_yolo",
+    "format_name": "yolo",
+    "output_dir": "D:\\Triad AI Company\\DSSPrototype\\datasets\\ready_for_training\\test_dataset",
+    "image_count": 10,
+    "annotation_count": 10,
+    "class_mapping": {
+      "main_battle_tank": 0,
+      "truck": 1
+    },
+    "exported_at": "2026-07-02T22:10:41.804238+00:00"
+  },
+  "metadata": {},
+  "processed_at": "2026-07-02T22:10:41.804434+00:00",
+  "status": "ready"
+}

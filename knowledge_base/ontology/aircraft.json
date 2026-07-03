@@ -1,0 +1,98 @@
+{
+  "version": "1.0.0",
+  "schema_version": "1.0",
+  "domain": "aircraft",
+  "description": "Aircraft ontology for military and civilian aviation platforms",
+  "entries": [
+    {
+      "canonical_name": "airplane",
+      "aliases": ["aircraft", "plane", "aeroplane", "fixed_wing_aircraft"],
+      "parent_category": "fixed_wing_aircraft",
+      "child_categories": ["fighter_jet", "bomber", "transport_plane", "reconnaissance_aircraft"],
+      "civilian_equivalents": ["commercial_airliner", "private_plane", "cargo_plane"],
+      "military_equivalents": ["combat_aircraft", "military_plane", "tactical_aircraft"],
+      "description": "A powered flying vehicle with fixed wings",
+      "confidence_base": 0.95
+    },
+    {
+      "canonical_name": "fighter_jet",
+      "aliases": ["fighter", "jet_fighter", "combat_aircraft", "intercept_aircraft"],
+      "parent_category": "military_aircraft",
+      "child_categories": ["multirole_fighter", "air_superiority_fighter", "light_fighter"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["combat_aircraft", "tactical_fighter", "air_defense_platform"],
+      "description": "A military aircraft designed for air-to-air combat and tactical missions",
+      "confidence_base": 0.85
+    },
+    {
+      "canonical_name": "helicopter",
+      "aliases": ["chopper", "rotorcraft", "rotary_wing_aircraft", "helo"],
+      "parent_category": "rotary_wing_aircraft",
+      "child_categories": ["attack_helicopter", "transport_helicopter", "reconnaissance_helicopter"],
+      "civilian_equivalents": ["civilian_helicopter", "medical_evacuation", "news_helicopter"],
+      "military_equivalents": ["attack_helicopter", "tactical_helicopter", "gunship"],
+      "description": "An aircraft that flies using rotating blades or rotors",
+      "confidence_base": 0.92
+    },
+    {
+      "canonical_name": "attack_helicopter",
+      "aliases": ["gunship", "combat_helicopter", "armed_helicopter"],
+      "parent_category": "military_aircraft",
+      "child_categories": ["heavy_attack_helicopter", "light_attack_helicopter"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["combat_helicopter", "tactical_helicopter", "close_air_support"],
+      "description": "A military helicopter equipped with weapons for ground attack missions",
+      "confidence_base": 0.82
+    },
+    {
+      "canonical_name": "transport_plane",
+      "aliases": ["cargo_plane", "airlifter", "transport_aircraft", "logistics_aircraft"],
+      "parent_category": "military_aircraft",
+      "child_categories": ["strategic_transport", "tactical_transport", "airborne_tanker"],
+      "civilian_equivalents": ["cargo_airliner", "freight_plane", "air_freighter"],
+      "military_equivalents": ["airlifter", "logistics_aircraft", "supply_aircraft"],
+      "description": "An aircraft designed for transporting troops, cargo, or equipment",
+      "confidence_base": 0.88
+    },
+    {
+      "canonical_name": "military_aircraft",
+      "aliases": ["combat_aircraft", "warplane", "military_plane", "tactical_aircraft"],
+      "parent_category": "aircraft",
+      "child_categories": ["fighter_jet", "bomber", "attack_helicopter", "transport_plane", "reconnaissance_aircraft"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["combat_platform", "air_asset", "tactical_platform"],
+      "description": "Any aircraft designed for military operations",
+      "confidence_base": 0.70
+    },
+    {
+      "canonical_name": "fixed_wing_aircraft",
+      "aliases": ["fixed_wing", "winged_aircraft", "conventional_aircraft"],
+      "parent_category": "aircraft",
+      "child_categories": ["airplane", "fighter_jet", "bomber", "transport_plane"],
+      "civilian_equivalents": ["commercial_airliner", "private_plane"],
+      "military_equivalents": ["military_plane", "combat_aircraft"],
+      "description": "An aircraft that generates lift using fixed wings",
+      "confidence_base": 0.75
+    },
+    {
+      "canonical_name": "rotary_wing_aircraft",
+      "aliases": ["rotorcraft", "rotary_wing", "helicopter_family"],
+      "parent_category": "aircraft",
+      "child_categories": ["helicopter", "attack_helicopter", "transport_helicopter"],
+      "civilian_equivalents": ["civilian_helicopter"],
+      "military_equivalents": ["military_helicopter", "tactical_rotorcraft"],
+      "description": "An aircraft that uses rotating blades to generate lift",
+      "confidence_base": 0.75
+    },
+    {
+      "canonical_name": "aircraft",
+      "aliases": ["airplane", "plane", "aviation_platform", "flying_machine"],
+      "parent_category": "vehicle",
+      "child_categories": ["fixed_wing_aircraft", "rotary_wing_aircraft", "military_aircraft"],
+      "civilian_equivalents": ["airliner", "private_plane", "cargo_plane"],
+      "military_equivalents": ["combat_aircraft", "military_plane", "tactical_platform"],
+      "description": "A machine capable of atmospheric flight",
+      "confidence_base": 0.55
+    }
+  ]
+}

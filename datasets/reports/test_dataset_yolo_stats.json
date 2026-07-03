@@ -1,0 +1,47 @@
+{
+  "dataset_id": "test_dataset_yolo",
+  "total_images": 10,
+  "total_annotations": 10,
+  "classes": [
+    "main_battle_tank",
+    "truck"
+  ],
+  "class_count": 2,
+  "objects_per_class": {
+    "main_battle_tank": 5,
+    "truck": 5
+  },
+  "class_distribution": {
+    "main_battle_tank": 0.5,
+    "truck": 0.5
+  },
+  "class_imbalance_ratio": 1.0,
+  "average_objects_per_image": 1.0,
+  "average_image_width": 644.5,
+  "average_image_height": 484.5,
+  "resolution_distribution": {
+    "640x480": 1,
+    "641x481": 1,
+    "642x482": 1,
+    "643x483": 1,
+    "644x484": 1,
+    "645x485": 1,
+    "646x486": 1,
+    "647x487": 1,
+    "648x488": 1,
+    "649x489": 1
+  },
+  "bbox_width_distribution": {
+    "0.30": 10
+  },
+  "bbox_height_distribution": {
+    "0.40": 10
+  },
+  "aspect_ratio_distribution": {
+    "0.75": 10
+  },
+  "ontology_coverage": 1.0,
+  "duplicate_ratio": 0.0,
+  "dataset_diversity": 1.0,
+  "generated_at": "2026-07-02T22:10:41.793784+00:00"
+}

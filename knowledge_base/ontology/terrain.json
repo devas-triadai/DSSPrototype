@@ -1,0 +1,118 @@
+{
+  "version": "1.0.0",
+  "schema_version": "1.0",
+  "domain": "terrain",
+  "description": "Terrain and environment ontology for military geographic analysis",
+  "entries": [
+    {
+      "canonical_name": "desert",
+      "aliases": ["arid_terrain", "sandy_terrain", "dry_land", "barren_land"],
+      "parent_category": "open_terrain",
+      "child_categories": ["sandy_desert", "rocky_desert", "salt_desert"],
+      "civilian_equivalents": ["desert_landscape", "arid_region"],
+      "military_equivalents": ["open_terrain", "exposed_terrain", "mobility_restricted_area"],
+      "description": "An arid region with minimal vegetation and sparse water sources",
+      "confidence_base": 0.90
+    },
+    {
+      "canonical_name": "forest",
+      "aliases": ["woodland", "woods", "jungle", "tree_cover", "vegetated_area"],
+      "parent_category": "vegetated_terrain",
+      "child_categories": ["dense_forest", "sparse_forest", "rainforest", "bamboo_forest"],
+      "civilian_equivalents": ["forest_reserve", "nature_reserve", "timberland"],
+      "military_equivalents": ["concealment_terrain", "cover_terrain", "ambush_terrain"],
+      "description": "An area densely covered with trees and vegetation",
+      "confidence_base": 0.90
+    },
+    {
+      "canonical_name": "urban",
+      "aliases": ["city", "town", "built_up_area", "metropolitan", "infrastructure"],
+      "parent_category": "built_terrain",
+      "child_categories": ["dense_urban", "suburban", "industrial_zone", "residential_area"],
+      "civilian_equivalents": ["city", "town", "metropolis", "municipality"],
+      "military_equivalents": ["urban_terrain", "close_terrain", "built_up_terrain", "mout_terrain"],
+      "description": "An area with dense human construction and infrastructure",
+      "confidence_base": 0.90
+    },
+    {
+      "canonical_name": "mountain",
+      "aliases": ["high_terrain", "elevated_terrain", "ridge", "peak", "highland"],
+      "parent_category": "rough_terrain",
+      "child_categories": ["steep_mountain", "mountain_pass", "plateau", "hill"],
+      "civilian_equivalents": ["mountain_range", "highland_area", "elevated_region"],
+      "military_equivalents": ["high_ground", "dominant_terrain", "observation_terrain", "restrictive_terrain"],
+      "description": "Elevated terrain with significant relief and steep slopes",
+      "confidence_base": 0.88
+    },
+    {
+      "canonical_name": "river",
+      "aliases": ["waterway", "stream", "creek", "water_course", "canal"],
+      "parent_category": "water_feature",
+      "child_categories": ["major_river", "minor_river", "stream", "tributary"],
+      "civilian_equivalents": ["river", "waterway", "stream"],
+      "military_equivalents": ["obstacle", "water_obstacle", "crossing_point", "natural_barrier"],
+      "description": "A natural flowing watercourse that may act as a mobility obstacle",
+      "confidence_base": 0.88
+    },
+    {
+      "canonical_name": "road",
+      "aliases": ["highway", "street", "path", "route", "track", "avenue"],
+      "parent_category": "transportation_network",
+      "child_categories": ["highway", "dirt_road", "paved_road", "military_road"],
+      "civilian_equivalents": ["highway", "roadway", "street", "avenue"],
+      "military_equivalents": ["route", "axis_of_advance", "line_of_communication", "supply_route"],
+      "description": "A paved or unpaved route for vehicle and foot movement",
+      "confidence_base": 0.85
+    },
+    {
+      "canonical_name": "open_terrain",
+      "aliases": ["clear_terrain", "exposed_ground", "open_ground", "flat_terrain"],
+      "parent_category": "terrain",
+      "child_categories": ["desert", "plain", "steppe", "savanna"],
+      "civilian_equivalents": ["open_land", "plain", "grassland"],
+      "military_equivalents": ["exposed_terrain", "observation_terrain", "fire_support_terrain"],
+      "description": "Terrain with minimal cover or concealment, offering long sight lines",
+      "confidence_base": 0.70
+    },
+    {
+      "canonical_name": "vegetated_terrain",
+      "aliases": ["green_terrain", "plant_cover", "natural_cover", "foliage_terrain"],
+      "parent_category": "terrain",
+      "child_categories": ["forest", "jungle", "bush", "swamp"],
+      "civilian_equivalents": ["woodland", "nature_area", "vegetated_area"],
+      "military_equivalents": ["concealment_terrain", "cover_terrain", "restrictive_terrain"],
+      "description": "Terrain covered by vegetation that provides natural concealment",
+      "confidence_base": 0.70
+    },
+    {
+      "canonical_name": "built_terrain",
+      "aliases": ["constructed_terrain", "man_made_terrain", "developed_area"],
+      "parent_category": "terrain",
+      "child_categories": ["urban", "industrial", "infrastructure", "fortification"],
+      "civilian_equivalents": ["urban_area", "developed_land", "built_environment"],
+      "military_equivalents": ["close_terrain", "restrictive_terrain", "urban_terrain"],
+      "description": "Terrain modified by human construction and infrastructure",
+      "confidence_base": 0.70
+    },
+    {
+      "canonical_name": "water_feature",
+      "aliases": ["hydrographic_feature", "water_body", "aquatic_terrain"],
+      "parent_category": "terrain",
+      "child_categories": ["river", "lake", "marsh", "ocean"],
+      "civilian_equivalents": ["water_body", "aquatic_area"],
+      "military_equivalents": ["obstacle", "natural_barrier", "crossing_point"],
+      "description": "Any body of water or watercourse that affects terrain mobility",
+      "confidence_base": 0.70
+    },
+    {
+      "canonical_name": "terrain",
+      "aliases": ["landscape", "geography", "topography", "environment"],
+      "parent_category": null,
+      "child_categories": ["open_terrain", "vegetated_terrain", "built_terrain", "rough_terrain", "water_feature"],
+      "civilian_equivalents": ["landscape", "geography", "environment"],
+      "military_equivalents": ["battlespace", "operational_environment", "maneuver_area"],
+      "description": "The physical features of a geographic area",
+      "confidence_base": 0.50
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+# ── Python ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+
+# ── Environment ──────────────────────────────────────────
+.env
+.env.local
+
+# ── IDE ──────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Logs ─────────────────────────────────────────────────
+*.log
+backend/logs/*
+!backend/logs/.gitkeep
+
+# ── Uploads ──────────────────────────────────────────────
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ── Datasets (large / binary files) ──────────────────────
+datasets/images/*
+datasets/maps/*
+datasets/documents/*
+!datasets/.gitkeep
+
+# ── OS ───────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Test artifacts ───────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ── Lint / type-check caches ─────────────────────────────
+.mypy_cache/
+.ruff_cache/

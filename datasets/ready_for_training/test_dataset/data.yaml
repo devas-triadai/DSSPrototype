@@ -1,0 +1,6 @@
+path: D:\Triad AI Company\DSSPrototype\datasets\ready_for_training\test_dataset
+train: train/images
+validation: validation/images
+test: test/images
+nc: 2
+names: ['main_battle_tank', 'truck']

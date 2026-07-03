@@ -1,0 +1,128 @@
+{
+  "version": "1.0.0",
+  "schema_version": "1.0",
+  "domain": "vehicles",
+  "description": "Ground vehicle ontology for military and civilian transport platforms",
+  "entries": [
+    {
+      "canonical_name": "truck",
+      "aliases": ["lorry", "cargo_vehicle", "transport_vehicle", "heavy_vehicle", "haulage_vehicle"],
+      "parent_category": "wheeled_vehicle",
+      "child_categories": ["cargo_truck", "tanker_truck", "military_truck", "flatbed_truck"],
+      "civilian_equivalents": ["semi_truck", "pickup_truck", "delivery_truck", "box_truck"],
+      "military_equivalents": ["tactical_truck", "logistics_vehicle", "cargo_carrier", "supply_vehicle"],
+      "description": "A motor vehicle designed to transport cargo or troops",
+      "confidence_base": 0.95
+    },
+    {
+      "canonical_name": "car",
+      "aliases": ["automobile", "motorcar", "vehicle", "passenger_vehicle", "sedan"],
+      "parent_category": "wheeled_vehicle",
+      "child_categories": ["sedan", "suv", "hatchback", "military_car"],
+      "civilian_equivalents": ["automobile", "passenger_car", "family_car"],
+      "military_equivalents": ["staff_car", "command_vehicle", "scout_vehicle"],
+      "description": "A wheeled motor vehicle used for transporting passengers",
+      "confidence_base": 0.95
+    },
+    {
+      "canonical_name": "bus",
+      "aliases": ["coach", "transit_bus", "passenger_bus", "omnibus"],
+      "parent_category": "wheeled_vehicle",
+      "child_categories": ["city_bus", "intercity_bus", "military_bus"],
+      "civilian_equivalents": ["public_transit_bus", "school_bus", "tour_bus"],
+      "military_equivalents": ["troop_transport", "personnel_carrier", "military_bus"],
+      "description": "A large motor vehicle carrying passengers by road",
+      "confidence_base": 0.92
+    },
+    {
+      "canonical_name": "main_battle_tank",
+      "aliases": ["mbt", "tank", "battle_tank", "armored_fighting_vehicle"],
+      "parent_category": "tracked_vehicle",
+      "child_categories": ["heavy_tank", "medium_tank", "light_tank"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["armored_vehicle", "ground_combat_vehicle", "tracked_armor"],
+      "description": "A heavily armored tracked vehicle with a large-caliber main gun designed for front-line combat",
+      "confidence_base": 0.85
+    },
+    {
+      "canonical_name": "armored_personnel_carrier",
+      "aliases": ["apc", "personnel_carrier", "troop_carrier", "infantry_carrier"],
+      "parent_category": "armored_vehicle",
+      "child_categories": ["wheeled_apc", "tracked_apc", "amphibious_apc"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["infantry_fighting_vehicle", "armored_transport", "mechanized_transport"],
+      "description": "An armored fighting vehicle designed to transport infantry to the battlefield",
+      "confidence_base": 0.82
+    },
+    {
+      "canonical_name": "infantry_fighting_vehicle",
+      "aliases": ["ifv", "fighting_vehicle", "mechanized_infantry_vehicle"],
+      "parent_category": "armored_vehicle",
+      "child_categories": ["heavy_ifv", "light_ifv", "amphibious_ifv"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["apc", "armored_vehicle", "ground_combat_vehicle"],
+      "description": "An armored vehicle designed to carry infantry into combat and provide fire support",
+      "confidence_base": 0.80
+    },
+    {
+      "canonical_name": "wheeled_vehicle",
+      "aliases": ["wheeled_transport", "road_vehicle", "motor_vehicle"],
+      "parent_category": "ground_vehicle",
+      "child_categories": ["truck", "car", "bus", "apc", "scout_vehicle"],
+      "civilian_equivalents": ["automobile", "road_transport"],
+      "military_equivalents": ["tactical_vehicle", "utility_vehicle", "transport_vehicle"],
+      "description": "Any vehicle that moves on wheels rather than tracks",
+      "confidence_base": 0.75
+    },
+    {
+      "canonical_name": "tracked_vehicle",
+      "aliases": ["track_vehicle", "crawler", "continuous_track_vehicle"],
+      "parent_category": "ground_vehicle",
+      "child_categories": ["main_battle_tank", "light_tank", "apc", "self_propelled_artillery"],
+      "civilian_equivalents": ["bulldozer", "excavator", "snow_cat"],
+      "military_equivalents": ["tank", "armored_vehicle", "ground_combat_vehicle"],
+      "description": "A vehicle that runs on continuous tracks instead of wheels",
+      "confidence_base": 0.75
+    },
+    {
+      "canonical_name": "armored_vehicle",
+      "aliases": ["armored_unit", "armour", "protected_vehicle", "armored_platform"],
+      "parent_category": "ground_combat_vehicle",
+      "child_categories": ["main_battle_tank", "apc", "ifv", "armored_car", "reconnaissance_vehicle"],
+      "civilian_equivalents": ["armored_truck", "cash_transport_vehicle"],
+      "military_equivalents": ["tank", "apc", "ifv", "ground_combat_vehicle"],
+      "description": "A vehicle protected by armor plating, typically for military use",
+      "confidence_base": 0.70
+    },
+    {
+      "canonical_name": "ground_combat_vehicle",
+      "aliases": ["combat_vehicle", "ground_warfare_vehicle", "battle_vehicle"],
+      "parent_category": "ground_vehicle",
+      "child_categories": ["armored_vehicle", "main_battle_tank", "apc", "ifv"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["armored_vehicle", "tank", "fighting_vehicle"],
+      "description": "A military vehicle designed for ground combat operations",
+      "confidence_base": 0.65
+    },
+    {
+      "canonical_name": "ground_vehicle",
+      "aliases": ["land_vehicle", "surface_vehicle", "terrestrial_vehicle"],
+      "parent_category": "vehicle",
+      "child_categories": ["wheeled_vehicle", "tracked_vehicle", "ground_combat_vehicle", "armored_vehicle"],
+      "civilian_equivalents": ["automobile", "truck", "bus", "car"],
+      "military_equivalents": ["tactical_vehicle", "combat_vehicle", "transport_vehicle"],
+      "description": "Any vehicle that operates on the ground surface",
+      "confidence_base": 0.60
+    },
+    {
+      "canonical_name": "vehicle",
+      "aliases": ["transport", "conveyance", "motor_vehicle", "craft"],
+      "parent_category": null,
+      "child_categories": ["ground_vehicle", "aircraft", "watercraft", "drone"],
+      "civilian_equivalents": ["automobile", "airplane", "boat"],
+      "military_equivalents": ["platform", "asset", "unit"],
+      "description": "A machine that transports people or goods",
+      "confidence_base": 0.50
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "dataset_id": "minimal",
+  "dataset_name": "Minimal Dataset",
+  "dataset_version": "1.0.0",
+  "created_date": "2026-07-02T22:10:41.954136+00:00",
+  "last_updated": "2026-07-02T22:10:41.954144+00:00",
+  "source": "",
+  "license": {
+    "name": "Proprietary \u2014 demonstration use only",
+    "url": null,
+    "attribution": null
+  },
+  "description": "",
+  "image_count": 0,
+  "annotation_count": 0,
+  "class_count": 0,
+  "classes": [],
+  "supported_formats": [
+    "yolo",
+    "coco",
+    "voc"
+  ],
+  "statistics": null,
+  "quality": null,
+  "validation": null,
+  "checksum": null,
+  "splits": null
+}

@@ -1,0 +1,87 @@
+{
+  "dataset_id": "full",
+  "dataset_name": "Full Dataset",
+  "dataset_version": "1.0.0",
+  "created_date": "2026-07-02T22:10:41.956353+00:00",
+  "last_updated": "2026-07-02T22:10:41.956356+00:00",
+  "source": "",
+  "license": {
+    "name": "Proprietary \u2014 demonstration use only",
+    "url": null,
+    "attribution": null
+  },
+  "description": "",
+  "image_count": 50,
+  "annotation_count": 200,
+  "class_count": 3,
+  "classes": [
+    "cat",
+    "dog",
+    "bird"
+  ],
+  "supported_formats": [
+    "yolo",
+    "coco",
+    "voc"
+  ],
+  "statistics": {
+    "dataset_id": "full",
+    "total_images": 50,
+    "total_annotations": 200,
+    "classes": [],
+    "class_count": 0,
+    "objects_per_class": {},
+    "class_distribution": {},
+    "class_imbalance_ratio": 0.0,
+    "average_objects_per_image": 0.0,
+    "average_image_width": 0.0,
+    "average_image_height": 0.0,
+    "resolution_distribution": {},
+    "bbox_width_distribution": {},
+    "bbox_height_distribution": {},
+    "aspect_ratio_distribution": {},
+    "dataset_completeness": 0.0,
+    "coverage_score": 0.0,
+    "generated_at": "2026-07-02T22:10:41.956172+00:00"
+  },
+  "quality": {
+    "dataset_id": "full",
+    "quality_score": 0.95,
+    "annotation_completeness": 0.0,
+    "dataset_balance": 0.0,
+    "image_quality_metadata": 0.0,
+    "duplicate_percentage": 0.0,
+    "missing_labels": 0,
+    "validation_score": 0.0,
+    "warnings": [],
+    "errors": [],
+    "generated_at": "2026-07-02T22:10:41.956181+00:00"
+  },
+  "validation": {
+    "dataset_id": "full",
+    "passed": true,
+    "missing_images": [],
+    "missing_labels": [],
+    "empty_annotations": [],
+    "duplicate_images": [],
+    "duplicate_annotations": [],
+    "corrupted_files": [],
+    "unsupported_extensions": [],
+    "invalid_bounding_boxes": [],
+    "negative_coordinates": [],
+    "class_mismatches": [],
+    "orphan_labels": [],
+    "invalid_metadata": [],
+    "total_checks": 12,
+    "passed_checks": 12,
+    "failed_checks": 0,
+    "validated_at": "2026-07-02T22:10:41.956190+00:00"
+  },
+  "checksum": {
+    "algorithm": "sha256",
+    "value": "abc123",
+    "file_path": "/tmp/test",
+    "verified_at": "2026-07-02T22:10:41.956196+00:00"
+  },
+  "splits": null
+}

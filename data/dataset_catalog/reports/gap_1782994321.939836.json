@@ -1,0 +1,177 @@
+{
+  "report_id": "gap_1782994321.939836",
+  "gaps": [
+    {
+      "node_id": "ground_vehicles",
+      "node_name": "Ground Vehicles",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Ground Vehicles (domain: military, priority: 1.0)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "tanks",
+      "node_name": "Tanks",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Tanks (domain: military, priority: 1.0)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "mbt",
+      "node_name": "Main Battle Tank",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Main Battle Tank (domain: military, priority: 1.0)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "light_tank",
+      "node_name": "Light Tank",
+      "domain": "military",
+      "severity": 0.9,
+      "description": "No coverage for Light Tank (domain: military, priority: 0.6)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "armored_personnel_carriers",
+      "node_name": "Armored Personnel Carriers",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Armored Personnel Carriers (domain: military, priority: 0.9)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "ifv",
+      "node_name": "Infantry Fighting Vehicle",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Infantry Fighting Vehicle (domain: military, priority: 0.9)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "mrap",
+      "node_name": "MRAP",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for MRAP (domain: military, priority: 0.7)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "utility_vehicles",
+      "node_name": "Utility Vehicles",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Utility Vehicles (domain: military, priority: 0.7)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "aircraft",
+      "node_name": "Aircraft",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Aircraft (domain: military, priority: 1.0)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "fighter_jet",
+      "node_name": "Fighter Jet",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Fighter Jet (domain: military, priority: 1.0)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "helicopter",
+      "node_name": "Helicopter",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Helicopter (domain: military, priority: 0.8)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "uav",
+      "node_name": "Unmanned Aerial Vehicle",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Unmanned Aerial Vehicle (domain: military, priority: 0.9)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "bomber",
+      "node_name": "Bomber",
+      "domain": "military",
+      "severity": 0.9,
+      "description": "No coverage for Bomber (domain: military, priority: 0.6)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "naval_vessels",
+      "node_name": "Naval Vessels",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Naval Vessels (domain: military, priority: 0.8)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "aircraft_carrier",
+      "node_name": "Aircraft Carrier",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Aircraft Carrier (domain: military, priority: 0.8)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "destroyer",
+      "node_name": "Destroyer",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Destroyer (domain: military, priority: 0.7)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "submarine",
+      "node_name": "Submarine",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Submarine (domain: military, priority: 0.7)",
+      "potential_sources": [],
+      "impact": "critical"
+    },
+    {
+      "node_id": "personnel",
+      "node_name": "Military Personnel",
+      "domain": "military",
+      "severity": 1.0,
+      "description": "No coverage for Military Personnel (domain: military, priority: 0.7)",
+      "potential_sources": [],
+      "impact": "critical"
+    }
+  ],
+  "critical_gap_count": 18,
+  "high_gap_count": 0,
+  "medium_gap_count": 0,
+  "low_gap_count": 0,
+  "total_gap_count": 18,
+  "aggregate_gap_severity": 0.9889,
+  "domain_breakdown": {
+    "military": 18
+  },
+  "generated_at": "2026-07-02T12:12:01.939846+00:00"
+}

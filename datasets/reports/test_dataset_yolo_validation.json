@@ -1,0 +1,19 @@
+{
+  "dataset_id": "test_dataset_yolo",
+  "passed": true,
+  "missing_images": [],
+  "missing_annotations": [],
+  "empty_annotations": [],
+  "corrupted_files": [],
+  "unsupported_extensions": [],
+  "invalid_bounding_boxes": [],
+  "negative_coordinates": [],
+  "class_mismatches": [],
+  "orphan_labels": [],
+  "total_checks": 52,
+  "passed_checks": 52,
+  "failed_checks": 0,
+  "warnings": [],
+  "errors": [],
+  "validated_at": "2026-07-02T22:10:41.775614+00:00"
+}

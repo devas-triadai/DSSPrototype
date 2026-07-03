@@ -1,0 +1,88 @@
+{
+  "version": "1.0.0",
+  "schema_version": "1.0",
+  "domain": "weapons",
+  "description": "Weapons and ordnance ontology for military systems",
+  "entries": [
+    {
+      "canonical_name": "missile",
+      "aliases": ["guided_missile", "projectile", "rocket", "ordnance"],
+      "parent_category": "guided_weapon",
+      "child_categories": ["ballistic_missile", "cruise_missile", "anti_tank_missile", "air_defense_missile"],
+      "civilian_equivalents": ["rocket", "space_launch_vehicle"],
+      "military_equivalents": ["precision_munition", "strike_weapon", "tactical_missile"],
+      "description": "A self-propelled guided weapon system",
+      "confidence_base": 0.85
+    },
+    {
+      "canonical_name": "anti_tank_missile",
+      "aliases": ["atgm", "anti_tank_guided_missile", "tank_killer", "anti_armor_missile"],
+      "parent_category": "missile",
+      "child_categories": ["wire_guided_atgm", "fire_and_forget_atgm", "top_attack_atgm"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["anti_armor_weapon", "tank_destroyer", "armor_defeat_weapon"],
+      "description": "A guided missile designed to destroy armored vehicles",
+      "confidence_base": 0.80
+    },
+    {
+      "canonical_name": "air_defense_missile",
+      "aliases": ["sam", "surface_to_air_missile", "anti_aircraft_missile", "air_interceptor"],
+      "parent_category": "missile",
+      "child_categories": ["long_range_sam", "medium_range_sam", "short_range_sam", "manpad"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["air_defense_weapon", "anti_aircraft_system", "aerial_interceptor"],
+      "description": "A missile designed to intercept and destroy airborne targets",
+      "confidence_base": 0.80
+    },
+    {
+      "canonical_name": "artillery",
+      "aliases": ["gun", "cannon", "howitzer", "field_gun", "ordnance_piece"],
+      "parent_category": "indirect_fire_weapon",
+      "child_categories": ["howitzer", "mortar", "rocket_artillery", "self_propelled_artillery"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["indirect_fire_platform", "fire_support_weapon", "tube_artillery"],
+      "description": "Large-caliber weapons that fire munitions over distances",
+      "confidence_base": 0.78
+    },
+    {
+      "canonical_name": "howitzer",
+      "aliases": ["field_howitzer", "towed_howitzer", "self_propelled_howitzer"],
+      "parent_category": "artillery",
+      "child_categories": ["light_howitzer", "medium_howitzer", "heavy_howitzer"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["fire_support_platform", "indirect_fire_weapon", "tube_artillery"],
+      "description": "An artillery piece capable of both high-angle and direct fire",
+      "confidence_base": 0.75
+    },
+    {
+      "canonical_name": "rocket_artillery",
+      "aliases": ["mlrs", "multiple_launch_rocket_system", "rocket_launcher", "salvo_launcher"],
+      "parent_category": "artillery",
+      "child_categories": ["light_rocket_artillery", "heavy_rocket_artillery", "tactical_rocket"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["area_fire_weapon", "salvo_fire_platform", "indirect_fire_system"],
+      "description": "An artillery system that fires rockets in salvos for area suppression",
+      "confidence_base": 0.75
+    },
+    {
+      "canonical_name": "guided_weapon",
+      "aliases": ["precision_weapon", "smart_weapon", "guided_munition"],
+      "parent_category": "weapon",
+      "child_categories": ["missile", "guided_bomb", "precision_artillery"],
+      "civilian_equivalents": [],
+      "military_equivalents": ["precision_munition", "smart_ordnance", "guided_ordnance"],
+      "description": "A weapon that can steer toward its target after launch",
+      "confidence_base": 0.65
+    },
+    {
+      "canonical_name": "weapon",
+      "aliases": ["armament", "ordnance", "weapon_system", "munition"],
+      "parent_category": null,
+      "child_categories": ["guided_weapon", "gun", "artillery", "missile"],
+      "civilian_equivalents": ["firearm", "hunting_weapon"],
+      "military_equivalents": ["armament", "weapon_system", "combat_system"],
+      "description": "Any instrument or device used to inflict damage or harm",
+      "confidence_base": 0.50
+    }
+  ]
+}

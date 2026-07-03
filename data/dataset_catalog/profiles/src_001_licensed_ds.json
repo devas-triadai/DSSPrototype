@@ -1,0 +1,38 @@
+{
+  "profile_id": "src_001_licensed_ds",
+  "source_id": "src_001",
+  "source_type": "local",
+  "path": "C:\\Users\\ravi\\AppData\\Local\\Temp\\pytest-of-ravi\\pytest-9\\test_detect_license0\\licensed_ds",
+  "total_images": 1,
+  "total_annotations": 0,
+  "total_classes": 0,
+  "classes": [],
+  "class_distribution": [],
+  "avg_width": 0.0,
+  "avg_height": 0.0,
+  "resolution_distribution": {},
+  "missing_annotations": 0,
+  "corrupt_images": 0,
+  "unsupported_formats": [
+    ""
+  ],
+  "annotation_format": "unknown",
+  "format_consistency": 1.0,
+  "license_info": {
+    "license_id": "cc_by_4",
+    "name": "Creative Commons Attribution 4.0",
+    "spdx_identifier": "CC-BY-4.0",
+    "is_open": true,
+    "allows_commercial": true,
+    "allows_modification": true,
+    "requires_attribution": true,
+    "requires_share_alike": false,
+    "risk_score": 0.1,
+    "compatible_licenses": []
+  },
+  "estimated_size_mb": 9.5367431640625e-6,
+  "description": "",
+  "tags": [],
+  "notes": "",
+  "profiled_at": "2026-07-02T22:10:41.270320+00:00"
+}

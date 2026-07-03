@@ -1,0 +1,18 @@
+{
+  "plan_id": "plan_e_001_e_002",
+  "entry_ids": [
+    "e_001",
+    "e_002"
+  ],
+  "priority": 0.8,
+  "status": "draft",
+  "estimated_budget": 1540.0,
+  "estimated_storage_mb": 1000.0,
+  "target_domains": [
+    "military"
+  ],
+  "notes": "High priority acquisition",
+  "created_by": "system",
+  "created_at": "2026-07-02T22:10:41.430073+00:00",
+  "updated_at": "2026-07-02T22:10:41.430078+00:00"
+}

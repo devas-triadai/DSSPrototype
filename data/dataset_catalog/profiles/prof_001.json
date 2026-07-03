@@ -1,0 +1,27 @@
+{
+  "profile_id": "prof_001",
+  "source_id": "src_001",
+  "source_type": "local",
+  "path": "/data",
+  "total_images": 0,
+  "total_annotations": 0,
+  "total_classes": 0,
+  "classes": [],
+  "class_distribution": [],
+  "avg_width": 0.0,
+  "avg_height": 0.0,
+  "resolution_distribution": {},
+  "missing_annotations": 0,
+  "corrupt_images": 0,
+  "unsupported_formats": [],
+  "annotation_format": "",
+  "format_consistency": 1.0,
+  "license_info": null,
+  "estimated_size_mb": 0.0,
+  "description": "",
+  "tags": [
+    "test"
+  ],
+  "notes": "",
+  "profiled_at": "2026-07-02T22:10:41.259915+00:00"
+}
