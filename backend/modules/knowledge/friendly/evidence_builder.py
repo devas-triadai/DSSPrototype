@@ -15,6 +15,7 @@ from backend.modules.knowledge.friendly.interfaces import (
     EvidenceBuilderInterface,
     KnowledgeItem,
 )
+from backend.modules.knowledge.name_matcher import is_substring_match, names_match
 
 logger = logging.getLogger("dss.knowledge.friendly.evidence_builder")
 
@@ -68,8 +69,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         obj_type = obj.name.lower()
 
         for equip in item.equipment:
-            equip_lower = equip.lower()
-            if equip_lower in obj_type:
+            if is_substring_match(obj_type, equip):
                 result.append(Evidence(
                     evidence_type="vehicle_match",
                     description=f"Detected '{obj_type}' matches known equipment '{equip}'",
@@ -88,7 +88,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         obj_type = obj.name.lower()
 
         for marking in item.markings:
-            if marking.lower() in obj_type:
+            if is_substring_match(obj_type, marking):
                 result.append(Evidence(
                     evidence_type="marking_match",
                     description=f"Object type '{obj_type}' consistent with marking '{marking}'",
@@ -106,7 +106,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         obj_type = obj.name.lower()
 
         for char in item.characteristics:
-            if char.lower() in obj_type:
+            if is_substring_match(obj_type, char):
                 result.append(Evidence(
                     evidence_type="characteristic_match",
                     description=f"Object type '{obj_type}' matches characteristic '{char}'",
@@ -128,7 +128,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
             identifiers.append(item.unit_name)
 
         for ident in identifiers:
-            if ident.lower() in obj_type:
+            if names_match(obj_type, ident):
                 result.append(Evidence(
                     evidence_type="identifier_match",
                     description=f"Description contains unit identifier '{ident}'",

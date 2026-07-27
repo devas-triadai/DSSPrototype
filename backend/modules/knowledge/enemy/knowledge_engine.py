@@ -21,6 +21,7 @@ from backend.modules.knowledge.enemy.interfaces import (
     KnowledgeItem,
     RetrieverInterface,
 )
+from backend.modules.knowledge.name_matcher import is_substring_match, names_match
 
 logger = logging.getLogger("dss.knowledge.enemy.knowledge_engine")
 
@@ -72,6 +73,10 @@ class KnowledgeEngine(KnowledgeEngineInterface):
             if not relevant:
                 continue
 
+            evidence = self._evidence_builder.build_evidence(obj, relevant)
+            if not evidence:
+                continue
+
             matched_object_count += 1
             total_knowledge_confidence += max(
                 (k.confidence for k in relevant), default=0.0
@@ -79,7 +84,6 @@ class KnowledgeEngine(KnowledgeEngineInterface):
 
             self._collect_equipment(relevant, identified_equipment)
 
-            evidence = self._evidence_builder.build_evidence(obj, relevant)
             all_evidence.extend(evidence)
 
         has_match = matched_object_count > 0
@@ -133,25 +137,24 @@ class KnowledgeEngine(KnowledgeEngineInterface):
         self, items: list[KnowledgeItem], obj: DetectedObject
     ) -> list[KnowledgeItem]:
         """Filter intelligence items to those relevant for *obj*."""
-        obj_type = obj.name.lower()
-
         relevant: list[KnowledgeItem] = []
         for item in items:
             if item.confidence < self._config.evidence_min_weight:
                 continue
+            if item.unit_name and names_match(obj.name, item.unit_name):
+                relevant.append(item)
+                continue
             if item.equipment:
                 for equip in item.equipment:
-                    if equip.lower() in obj_type:
+                    if is_substring_match(obj.name, equip):
                         relevant.append(item)
                         break
-            if item not in relevant and item.markings:
-                relevant.append(item)
-            if item not in relevant and item.country and item.country.lower() in obj_type:
+            if item not in relevant and item.country and is_substring_match(obj.name, item.country):
                 relevant.append(item)
             if (
                 item not in relevant
                 and item.tactical_role
-                and item.tactical_role.lower() in obj_type
+                and is_substring_match(obj.name, item.tactical_role)
             ):
                 relevant.append(item)
 

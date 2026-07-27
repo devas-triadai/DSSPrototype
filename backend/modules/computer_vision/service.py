@@ -71,9 +71,7 @@ class ComputerVisionService(VisionModule):
         self._image_preprocessor = image_preprocessor or ImagePreprocessor()
         self._model_manager = model_manager or ModelManager()
         self._inference_engine = inference_engine or InferenceEngine()
-        self._result_converter = result_converter or ResultConverter(
-            class_mapping=_YOLO_TO_OBJECT_TYPE,
-        )
+        self._result_converter = result_converter or ResultConverter()
         self._config = cv_config
 
     # ------------------------------------------------------------------

@@ -15,6 +15,7 @@ from backend.modules.knowledge.enemy.interfaces import (
     EvidenceBuilderInterface,
     KnowledgeItem,
 )
+from backend.modules.knowledge.name_matcher import is_substring_match, names_match
 
 logger = logging.getLogger("dss.knowledge.enemy.evidence_builder")
 
@@ -76,8 +77,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         obj_type = obj.name.lower()
 
         for equip in item.equipment:
-            equip_lower = equip.lower()
-            if equip_lower in obj_type:
+            if is_substring_match(obj_type, equip):
                 result.append(Evidence(
                     evidence_type="vehicle_id",
                     description=f"Detected '{obj_type}' matches known enemy equipment '{equip}'",
@@ -90,18 +90,15 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     def _match_platform(self, obj: DetectedObject, item: KnowledgeItem) -> list[Evidence]:
         """Match detected ontology type against a specific platform identifier."""
         result: list[Evidence] = []
-        obj_type = obj.name.lower()
 
-        if item.unit_name:
-            name_lower = item.unit_name.lower()
-            if name_lower in obj_type:
-                result.append(Evidence(
-                    evidence_type="platform_match",
-                    description=f"Detected object matches platform '{item.unit_name}'",
-                    matched_attribute=item.unit_name,
-                    knowledge_source=item.source,
-                    weight=0.9,
-                ))
+        if item.unit_name and names_match(obj.name, item.unit_name):
+            result.append(Evidence(
+                evidence_type="platform_match",
+                description=f"Detected object matches platform '{item.unit_name}'",
+                matched_attribute=item.unit_name,
+                knowledge_source=item.source,
+                weight=0.9,
+            ))
         return result
 
     def _match_country(self, obj: DetectedObject, item: KnowledgeItem) -> list[Evidence]:
@@ -109,7 +106,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         result: list[Evidence] = []
         obj_type = obj.name.lower()
 
-        if item.country and item.country.lower() in obj_type:
+        if item.country and is_substring_match(obj_type, item.country):
             result.append(Evidence(
                 evidence_type="country_attribution",
                 description=f"Object type '{obj_type}' suggests country of origin '{item.country}'",
@@ -125,8 +122,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         obj_type = obj.name.lower()
 
         for cap in item.capabilities:
-            cap_lower = cap.lower()
-            if cap_lower in obj_type:
+            if is_substring_match(obj_type, cap):
                 result.append(Evidence(
                     evidence_type="weapon_system",
                     description=f"Object type '{obj_type}' matches weapon system '{cap}'",
@@ -144,7 +140,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         obj_type = obj.name.lower()
 
         for marking in item.markings:
-            if marking.lower() in obj_type:
+            if is_substring_match(obj_type, marking):
                 result.append(Evidence(
                     evidence_type="camouflage_match",
                     description=f"Object type '{obj_type}' consistent with marking '{marking}'",
@@ -160,7 +156,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         obj_type = obj.name.lower()
 
         for char in item.characteristics:
-            if char.lower() in obj_type:
+            if is_substring_match(obj_type, char):
                 result.append(Evidence(
                     evidence_type="capability_match",
                     description=f"Object type '{obj_type}' matches characteristic '{char}'",
@@ -178,7 +174,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         obj_type = obj.name.lower()
 
         for indicator in item.threat_indicators:
-            if indicator.lower() in obj_type:
+            if is_substring_match(obj_type, indicator):
                 result.append(Evidence(
                     evidence_type="threat_indicator",
                     description=f"Object type '{obj_type}' matches threat indicator '{indicator}'",
@@ -195,7 +191,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         result: list[Evidence] = []
         obj_type = obj.name.lower()
 
-        if item.tactical_role and item.tactical_role.lower() in obj_type:
+        if item.tactical_role and is_substring_match(obj_type, item.tactical_role):
             result.append(Evidence(
                 evidence_type="tactical_role",
                 description=f"Ontology type '{obj_type}' matches role '{item.tactical_role}'",

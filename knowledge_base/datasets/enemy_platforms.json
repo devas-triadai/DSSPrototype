@@ -177,6 +177,29 @@
       "speed_kmh": 250,
       "countermeasures": [],
       "country": "China"
+    },
+    {
+      "document_type": "enemy_platform",
+      "document_id": "EN-ATGM-BS-009",
+      "name": "Baktar Shikan ATGM",
+      "category": "Anti-Tank Guided Missile",
+      "platform_type": "weapon_system",
+      "country": "Pakistan",
+      "manufacturer": "Pakistan Ordnance Factories (POF)",
+      "role": "Anti-armour / anti-fortification",
+      "characteristics": ["wire-guided SACLOS", "thermal sight", "man-portable or vehicle-mounted"],
+      "armament": ["HJ-8 variant HEAT warhead"],
+      "sensors": ["thermal imager", "day sight"],
+      "capabilities": ["fire-and-forget (limited)", "night capability", "top-attack mode"],
+      "threat_indicators": ["proliferation to non-state actors", "Chinese HJ-8 derivative"],
+      "tactical_role": "Anti-armour ambush / defensive",
+      "equipment": ["tripod launcher", "thermal sight"],
+      "markings": ["desert camouflage launcher", "Pakistani Army markings"],
+      "weight_tonnes": 0.022,
+      "crew": 3,
+      "speed_kmh": 0,
+      "countermeasures": [],
+      "country": "Pakistan"
     }
   ]
 }

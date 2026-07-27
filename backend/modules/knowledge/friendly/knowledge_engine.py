@@ -21,6 +21,7 @@ from backend.modules.knowledge.friendly.interfaces import (
     KnowledgeItem,
     RetrieverInterface,
 )
+from backend.modules.knowledge.name_matcher import is_substring_match, names_match
 
 logger = logging.getLogger("dss.knowledge.friendly.knowledge_engine")
 
@@ -71,12 +72,15 @@ class KnowledgeEngine(KnowledgeEngineInterface):
             if not relevant:
                 continue
 
+            evidence = self._evidence_builder.build_evidence(obj, relevant)
+            if not evidence:
+                continue
+
             matched_object_count += 1
             total_knowledge_confidence += max(
                 (k.confidence for k in relevant), default=0.0
             )
 
-            evidence = self._evidence_builder.build_evidence(obj, relevant)
             all_evidence.extend(evidence)
 
         has_match = matched_object_count > 0
@@ -126,19 +130,18 @@ class KnowledgeEngine(KnowledgeEngineInterface):
         self, items: list[KnowledgeItem], obj: DetectedObject
     ) -> list[KnowledgeItem]:
         """Filter knowledge items to those relevant for *obj*."""
-        obj_type = obj.name.lower()
-
         relevant: list[KnowledgeItem] = []
         for item in items:
             if item.confidence < self._config.evidence_min_weight:
                 continue
+            if item.unit_name and names_match(obj.name, item.unit_name):
+                relevant.append(item)
+                continue
             if item.equipment:
                 for equip in item.equipment:
-                    if equip.lower() in obj_type:
+                    if is_substring_match(obj.name, equip):
                         relevant.append(item)
                         break
-            if item not in relevant and item.markings:
-                relevant.append(item)
 
         if not relevant:
             relevant = items[:self._config.max_knowledge_items]
