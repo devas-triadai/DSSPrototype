@@ -94,7 +94,7 @@ export default function DetectionResults({
                       </span>
                     </td>
                     <td className="py-1.5 pr-2 text-gray-400">
-                      {obj.label || "\u2014"}
+                      {obj.name || "\u2014"}
                     </td>
                     <td className="py-1.5 pr-2">
                       <ConfidenceBar value={obj.confidence} />

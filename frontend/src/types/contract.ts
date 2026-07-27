@@ -37,11 +37,10 @@ export interface Polygon {
 
 export interface DetectedObject {
   id: string;
+  name: string;
   object_type: ObjectType;
   confidence: number;
   geometry: AnnotationGeometry;
-  label: string | null;
-  description: string | null;
 }
 
 export interface DetectionResult {
