@@ -69,6 +69,7 @@ class ResultConverter(ResultConverterInterface):
 
             objects.append(
                 DetectedObject(
+                    name=detection.class_name,
                     object_type=object_type,
                     confidence=detection.confidence,
                     geometry=geometry,

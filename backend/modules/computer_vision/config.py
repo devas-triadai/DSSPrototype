@@ -15,7 +15,7 @@ class CVConfig(BaseSettings):
 
     model_config = {"env_prefix": "CV_"}
 
-    model_path: str = "models/yolov8n.pt"
+    model_path: str = "models/artillery/best.pt"
     default_model_type: str = "yolo"
     confidence_threshold: float = 0.25
     iou_threshold: float = 0.45

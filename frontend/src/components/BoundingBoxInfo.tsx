@@ -29,20 +29,20 @@ export default function BoundingBoxInfo({ objects }: BoundingBoxInfoProps) {
                   {obj.id.slice(0, 8)}
                 </td>
                 <td className="py-1 pr-2 font-mono">
-                  {obj.bounding_box.x.toFixed(1)}
+                  {obj.geometry.box.x.toFixed(1)}
                 </td>
                 <td className="py-1 pr-2 font-mono">
-                  {obj.bounding_box.y.toFixed(1)}
+                  {obj.geometry.box.y.toFixed(1)}
                 </td>
                 <td className="py-1 pr-2 font-mono">
-                  {obj.bounding_box.width.toFixed(1)}
+                  {obj.geometry.box.width.toFixed(1)}
                 </td>
                 <td className="py-1 pr-2 font-mono">
-                  {obj.bounding_box.height.toFixed(1)}
+                  {obj.geometry.box.height.toFixed(1)}
                 </td>
                 <td className="py-1 font-mono text-dss-muted">
                   {(
-                    obj.bounding_box.width * obj.bounding_box.height
+                    obj.geometry.box.width * obj.geometry.box.height
                   ).toFixed(0)}
                 </td>
               </tr>

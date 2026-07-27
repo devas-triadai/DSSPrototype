@@ -73,7 +73,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     def _match_vehicle(self, obj: DetectedObject, item: KnowledgeItem) -> list[Evidence]:
         """Match detected object ontology type against known enemy equipment."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         for equip in item.equipment:
             equip_lower = equip.lower()
@@ -90,7 +90,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     def _match_platform(self, obj: DetectedObject, item: KnowledgeItem) -> list[Evidence]:
         """Match detected ontology type against a specific platform identifier."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         if item.unit_name:
             name_lower = item.unit_name.lower()
@@ -107,7 +107,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     def _match_country(self, obj: DetectedObject, item: KnowledgeItem) -> list[Evidence]:
         """Match detected object type against known country of origin."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         if item.country and item.country.lower() in obj_type:
             result.append(Evidence(
@@ -122,7 +122,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     def _match_weapon_system(self, obj: DetectedObject, item: KnowledgeItem) -> list[Evidence]:
         """Match detected object type against known weapon systems."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         for cap in item.capabilities:
             cap_lower = cap.lower()
@@ -141,7 +141,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         Note: CV output contains no color/marking info. This matcher relies
         on object type + geospatial context."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         for marking in item.markings:
             if marking.lower() in obj_type:
@@ -157,7 +157,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     def _match_capability(self, obj: DetectedObject, item: KnowledgeItem) -> list[Evidence]:
         """Match detected object type against known enemy capabilities."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         for char in item.characteristics:
             if char.lower() in obj_type:
@@ -175,7 +175,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     ) -> list[Evidence]:
         """Match detected object type against known threat indicators."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         for indicator in item.threat_indicators:
             if indicator.lower() in obj_type:
@@ -193,7 +193,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     ) -> list[Evidence]:
         """Match detected object type against a known tactical role."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         if item.tactical_role and item.tactical_role.lower() in obj_type:
             result.append(Evidence(

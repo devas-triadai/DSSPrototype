@@ -16,11 +16,30 @@ export interface BoundingBox {
   height: number;
 }
 
+export interface AnnotationGeometry {
+  box: BoundingBox;
+  obb: OrientedBBox | null;
+  polygon: Polygon | null;
+  segmentation_mask: string | null;
+}
+
+export interface OrientedBBox {
+  cx: number;
+  cy: number;
+  width: number;
+  height: number;
+  angle: number;
+}
+
+export interface Polygon {
+  vertices: [number, number][];
+}
+
 export interface DetectedObject {
   id: string;
   object_type: ObjectType;
   confidence: number;
-  bounding_box: BoundingBox;
+  geometry: AnnotationGeometry;
   label: string | null;
   description: string | null;
 }

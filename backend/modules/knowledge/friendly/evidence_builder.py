@@ -65,7 +65,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     def _match_equipment(self, obj: DetectedObject, item: KnowledgeItem) -> list[Evidence]:
         """Match detected object ontology type against known equipment."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         for equip in item.equipment:
             equip_lower = equip.lower()
@@ -85,7 +85,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
         Fallback uses object type + geospatial proximity.
         """
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         for marking in item.markings:
             if marking.lower() in obj_type:
@@ -103,7 +103,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     ) -> list[Evidence]:
         """Match detected object type against known characteristics."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         for char in item.characteristics:
             if char.lower() in obj_type:
@@ -119,7 +119,7 @@ class EvidenceBuilder(EvidenceBuilderInterface):
     def _match_identifiers(self, obj: DetectedObject, item: KnowledgeItem) -> list[Evidence]:
         """Match detected object type against unit identifiers."""
         result: list[Evidence] = []
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         identifiers: list[str] = []
         if item.unit_id:

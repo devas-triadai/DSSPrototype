@@ -119,8 +119,8 @@ class KnowledgeEngine(KnowledgeEngineInterface):
     # ------------------------------------------------------------------
 
     def _build_query(self, obj: DetectedObject) -> str:
-        """Build a query string from a detected object's ontology type."""
-        return obj.object_type.value
+        """Build a query string from a detected object's model class name."""
+        return obj.name
 
     def _build_context(self, detection: DetectionResult) -> dict[str, Any]:
         """Build contextual metadata for the retrieval query."""
@@ -133,7 +133,7 @@ class KnowledgeEngine(KnowledgeEngineInterface):
         self, items: list[KnowledgeItem], obj: DetectedObject
     ) -> list[KnowledgeItem]:
         """Filter intelligence items to those relevant for *obj*."""
-        obj_type = obj.object_type.value.lower()
+        obj_type = obj.name.lower()
 
         relevant: list[KnowledgeItem] = []
         for item in items:

@@ -100,8 +100,8 @@ export default function DetectionResults({
                       <ConfidenceBar value={obj.confidence} />
                     </td>
                     <td className="py-1.5 font-mono text-[10px] text-gray-500">
-                      ({obj.bounding_box.x.toFixed(0)},{" "}
-                      {obj.bounding_box.y.toFixed(0)})
+                      ({obj.geometry.box.x.toFixed(0)},{" "}
+                      {obj.geometry.box.y.toFixed(0)})
                     </td>
                   </tr>
                 ))}

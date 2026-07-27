@@ -40,8 +40,12 @@ class DetectedObject(BaseModel):
         default_factory=lambda: str(uuid4()),
         description="Unique detection identifier",
     )
+    name: str = Field(
+        ..., description="Model class name, e.g. K9_Vajra, Baktar_Shikan_ATGM"
+    )
     object_type: ObjectType = Field(
-        ..., description="Perception-only class from the CV ontology"
+        default=ObjectType.UNKNOWN_OBJECT,
+        description="Perception-only class from the CV ontology",
     )
     confidence: float = Field(
         ..., ge=0.0, le=1.0, description="Detection confidence score in [0, 1]"
