@@ -233,6 +233,12 @@ class ObjectType(str, Enum):
     NATURAL_GLACIER = "natural.glacier"
     NATURAL_UNKNOWN = "natural.unknown"
 
+    # --- Military ---
+    MILITARY_ARTILLERY = "artillery"
+    MILITARY_MISSILE = "missile"
+    MILITARY_TANK = "tank"
+    MILITARY_ARMORED_VEHICLE = "armored_vehicle"
+
     # --- Objects of Interest ---
     OOI_SHIPPING_CONTAINER = "ooi.shipping_container"
     OOI_PALLET = "ooi.pallet"

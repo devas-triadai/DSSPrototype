@@ -19,10 +19,19 @@ class ResultConverter(ResultConverterInterface):
 
     A class-to-type mapping must be provided. The mapper translates
     model-specific class IDs into the ontology ``ObjectType`` enum.
+    ``class_name_mapping`` provides a fallback keyed by the model's
+    human-readable class name (case-insensitive, underscores/spaces
+    normalised) so that custom military models work even when their
+    class IDs differ from COCO.
     """
 
-    def __init__(self, class_mapping: dict[int, ObjectType] | None = None) -> None:
+    def __init__(
+        self,
+        class_mapping: dict[int, ObjectType] | None = None,
+        class_name_mapping: dict[str, ObjectType] | None = None,
+    ) -> None:
         self._class_mapping = class_mapping or {}
+        self._class_name_mapping = class_name_mapping or {}
         self._threshold = cv_config.confidence_threshold
 
     def convert(
@@ -56,7 +65,10 @@ class ResultConverter(ResultConverterInterface):
             if detection.confidence < self._threshold:
                 continue
 
-            object_type = self._class_mapping.get(detection.class_id, ObjectType.UNKNOWN_OBJECT)
+            object_type = self._class_mapping.get(detection.class_id)
+            if object_type is None:
+                normalized = detection.class_name.strip().lower().replace(" ", "_").replace("-", "_")
+                object_type = self._class_name_mapping.get(normalized, ObjectType.UNKNOWN_OBJECT)
 
             geometry = AnnotationGeometry(
                 box=BoundingBox(

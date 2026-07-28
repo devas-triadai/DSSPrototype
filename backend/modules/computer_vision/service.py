@@ -41,6 +41,37 @@ _YOLO_TO_OBJECT_TYPE: dict[int, ObjectType] = {
     13: ObjectType.INFRASTRUCTURE_BENCH,
 }  # Remaining COCO classes (indoor objects, animals, food) → UNKNOWN_OBJECT
 
+# Name-based fallback for custom models (e.g. military YOLO).
+# Keys are normalised: lowercase, underscores for spaces/hyphens.
+_MILITARY_NAME_TO_OBJECT_TYPE: dict[str, ObjectType] = {
+    "artillery": ObjectType.MILITARY_ARTILLERY,
+    "missile": ObjectType.MILITARY_MISSILE,
+    "tank": ObjectType.MILITARY_TANK,
+    "armored_vehicle": ObjectType.MILITARY_ARMORED_VEHICLE,
+    "baktar_shikan_atgm": ObjectType.MILITARY_MISSILE,
+    "atgm": ObjectType.MILITARY_MISSILE,
+    "anti_tank_guided_missile": ObjectType.MILITARY_MISSILE,
+    "howitzer": ObjectType.MILITARY_ARTILLERY,
+    "rocket_launcher": ObjectType.MILITARY_ARTILLERY,
+    "mlrs": ObjectType.MILITARY_ARTILLERY,
+    "bmp": ObjectType.MILITARY_ARMORED_VEHICLE,
+    "apc": ObjectType.MILITARY_ARMORED_VEHICLE,
+    "ifv": ObjectType.MILITARY_ARMORED_VEHICLE,
+    "person": ObjectType.PEOPLE_PERSON,
+    "soldier": ObjectType.PEOPLE_PERSON,
+    "car": ObjectType.GROUND_VEHICLE_CAR,
+    "truck": ObjectType.GROUND_VEHICLE_TRUCK,
+    "bus": ObjectType.GROUND_VEHICLE_BUS,
+    "aircraft": ObjectType.AIRCRAFT_FIXED_WING,
+    "helicopter": ObjectType.AIRCRAFT_ROTARY_WING,
+    "drone": ObjectType.AIRCRAFT_UAV,
+    "ship": ObjectType.WATERCRAFT_SHIP,
+    "boat": ObjectType.WATERCRAFT_BOAT,
+    "building": ObjectType.BUILDINGS_BUILDING,
+    "bridge": ObjectType.BRIDGES_BEAM,
+    "road": ObjectType.ROAD_NETWORK_ROAD,
+}
+
 
 class ComputerVisionService(VisionModule):
     """Orchestrates the end-to-end computer vision pipeline.
@@ -71,7 +102,10 @@ class ComputerVisionService(VisionModule):
         self._image_preprocessor = image_preprocessor or ImagePreprocessor()
         self._model_manager = model_manager or ModelManager()
         self._inference_engine = inference_engine or InferenceEngine()
-        self._result_converter = result_converter or ResultConverter()
+        self._result_converter = result_converter or ResultConverter(
+            class_mapping=_YOLO_TO_OBJECT_TYPE,
+            class_name_mapping=_MILITARY_NAME_TO_OBJECT_TYPE,
+        )
         self._config = cv_config
 
     # ------------------------------------------------------------------

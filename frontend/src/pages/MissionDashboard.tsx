@@ -30,6 +30,7 @@ export default function MissionDashboard() {
   const [uploadHistory, setUploadHistory] = useState<UploadEntry[]>([]);
   const [currentMetadata, setCurrentMetadata] =
     useState<ImageMetadata | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const executeMutation = useRuntimeExecute();
 
@@ -97,10 +98,15 @@ export default function MissionDashboard() {
         <aside className="space-y-4 lg:col-span-3">
           <ImageUploadPanel
             onExecute={handleExecute}
+            onPreviewReady={setPreviewUrl}
             isRunning={isRunning}
           />
           {currentMetadata && (
-            <ImagePreview metadata={currentMetadata} />
+            <ImagePreview
+              metadata={currentMetadata}
+              previewUrl={previewUrl}
+              objects={executionResult?.detection?.objects ?? null}
+            />
           )}
           <UploadHistory
             entries={uploadHistory}

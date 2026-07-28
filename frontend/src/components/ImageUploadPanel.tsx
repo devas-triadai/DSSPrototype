@@ -4,6 +4,7 @@ import LoadingSpinner from "./LoadingSpinner";
 
 interface ImageUploadPanelProps {
   onExecute: (file: File, metadata: ImageMetadata) => void;
+  onPreviewReady?: (previewUrl: string) => void;
   isRunning: boolean;
 }
 
@@ -57,6 +58,7 @@ function formatFileSize(bytes: number): string {
 
 export default function ImageUploadPanel({
   onExecute,
+  onPreviewReady,
   isRunning,
 }: ImageUploadPanelProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -87,12 +89,13 @@ export default function ImageUploadPanel({
       if (fileMeta) URL.revokeObjectURL(fileMeta.previewUrl);
       const meta = await readFileMetadata(file);
       setFileMeta(meta);
+      onPreviewReady?.(meta.previewUrl);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to read image");
     } finally {
       setIsProcessing(false);
     }
-  }, [fileMeta]);
+  }, [fileMeta, onPreviewReady]);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
